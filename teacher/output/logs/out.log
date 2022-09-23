@@ -1,0 +1,989 @@
+2022-07-27 11:08:26,061-__main__-INFO-link_start...
+2022-07-27 11:08:26,148-__main__-INFO-CUDA available: True
+2022-07-27 11:08:26,150-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-27 11:09:11,226-tools.init_tool-INFO-Begin to initialize model...
+2022-07-27 11:09:19,140-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-07-27 11:09:19,141-tools.init_tool-INFO-Initialize done.
+2022-07-27 11:09:19,141-__main__-INFO-the size of train_dataset: 331
+2022-07-27 11:09:19,373-__main__-INFO-an example of train_datatset:
+2022-07-27 11:09:19,373-__main__-INFO-{'tokens': tensor([[  101,  8127,  2399,  ...,  8024,  6158,  1440],
+        [  101,  6158,  1440,  ...,     0,     0,     0],
+        [  101,  8201,  2399,  ...,   844,   817,   782],
+        ...,
+        [  101,  8119,  2399,  ...,  8251, 10765,  1039],
+        [  101,  8112,  2399,  ...,     0,     0,     0],
+        [  101,  8127,  2399,  ...,     0,     0,     0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        ...,
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,   0,   0,   0],
+        ...,
+        [  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-07-27 11:09:19,375-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-07-27 11:09:19,378-tools.train_tool-INFO-Training start....
+2022-07-27 11:18:02,593-tools.eval_tool-INFO-0      train  331/331     8:43/ 0:00    2187.705{'acc': 0.6678, 'precision': 0.6678, 'recall': 0.6678, 'f1': 0.6678}
+2022-07-27 11:18:58,648-tools.eval_tool-INFO-0      valid  76/76       0:56/ 0:00    1925.211{'acc': 0.6684, 'precision': 0.6684, 'recall': 0.6684, 'f1': 0.6684}
+2022-07-27 11:27:45,073-tools.eval_tool-INFO-1      train  331/331     8:46/ 0:00    1961.303{'acc': 0.6698, 'precision': 0.6698, 'recall': 0.6698, 'f1': 0.6698}
+2022-07-27 11:28:42,223-tools.eval_tool-INFO-1      valid  76/76       0:57/ 0:00    1808.524{'acc': 0.6684, 'precision': 0.6684, 'recall': 0.6684, 'f1': 0.6684}
+2022-07-27 11:31:05,884-__main__-INFO-link_start...
+2022-07-27 11:31:06,018-__main__-INFO-CUDA available: True
+2022-07-27 11:31:06,020-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-27 11:34:22,645-tools.init_tool-INFO-Begin to initialize model...
+2022-07-27 11:34:40,327-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-07-27 11:34:40,328-tools.init_tool-INFO-Initialize done.
+2022-07-27 11:34:40,328-__main__-INFO-the size of train_dataset: 331
+2022-07-27 11:34:40,624-__main__-INFO-an example of train_datatset:
+2022-07-27 11:34:40,624-__main__-INFO-{'tokens': tensor([[ 101,  671,  510,  ..., 1217, 1057,  100],
+        [ 101, 6158, 1440,  ...,    0,    0,    0],
+        [ 101, 8127, 2399,  ..., 3621, 7032, 7583],
+        ...,
+        [ 101,  122,  510,  ...,  782,  928,  818],
+        [ 101, 8368, 2399,  ..., 7828, 3378,  510],
+        [ 101, 8138, 2399,  ...,    0,    0,    0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        ...,
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,   0,   0,   0],
+        ...,
+        [  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-07-27 11:34:40,627-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-07-27 11:34:40,630-tools.train_tool-INFO-Training start....
+2022-07-27 11:43:51,891-tools.eval_tool-INFO-0      train  331/331     9:11/ 0:00    2364.637{'acc': 0.6655, 'precision': 0.6655, 'recall': 0.6655, 'f1': 0.6655}
+2022-07-27 11:44:51,129-tools.eval_tool-INFO-0      valid  76/76       0:59/ 0:00    1925.865{'acc': 0.6684, 'precision': 0.6684, 'recall': 0.6684, 'f1': 0.6684}
+2022-07-27 11:54:00,172-tools.eval_tool-INFO-1      train  331/331     9:09/ 0:00    1974.916{'acc': 0.6663, 'precision': 0.6663, 'recall': 0.6663, 'f1': 0.6663}
+2022-07-27 11:55:01,390-tools.eval_tool-INFO-1      valid  76/76       1:01/ 0:00    1827.983{'acc': 0.6684, 'precision': 0.6684, 'recall': 0.6684, 'f1': 0.6684}
+2022-07-27 12:04:20,144-tools.eval_tool-INFO-2      train  331/331     9:18/ 0:00    1843.556{'acc': 0.5509, 'precision': 0.5509, 'recall': 0.5509, 'f1': 0.5509}
+2022-07-27 12:05:21,518-tools.eval_tool-INFO-2      valid  76/76       1:01/ 0:00    1714.023{'acc': 0.6684, 'precision': 0.6684, 'recall': 0.6684, 'f1': 0.6684}
+2022-07-27 12:14:41,323-tools.eval_tool-INFO-3      train  331/331     9:19/ 0:00    1726.352{'acc': 0.2221, 'precision': 0.2221, 'recall': 0.2221, 'f1': 0.2221}
+2022-07-27 12:15:43,805-tools.eval_tool-INFO-3      valid  76/76       1:02/ 0:00    1611.651{'acc': 0.0, 'precision': 0.0, 'recall': 0.0, 'f1': 0.0}
+2022-07-27 12:24:53,717-tools.eval_tool-INFO-4      train  331/331     9:09/ 0:00    1622.153{'acc': 0.1317, 'precision': 0.1317, 'recall': 0.1317, 'f1': 0.1317}
+2022-07-27 12:26:13,737-__main__-INFO-link_start...
+2022-07-27 12:26:13,824-__main__-INFO-CUDA available: True
+2022-07-27 12:26:13,827-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-27 12:28:10,485-tools.init_tool-INFO-Begin to initialize model...
+2022-07-27 12:28:26,500-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-07-27 12:28:26,500-tools.init_tool-INFO-Initialize done.
+2022-07-27 12:28:26,500-__main__-INFO-the size of train_dataset: 644
+2022-07-27 12:28:26,730-__main__-INFO-an example of train_datatset:
+2022-07-27 12:28:26,730-__main__-INFO-{'tokens': tensor([[ 101,  753,  510,  ...,    0,    0,    0],
+        [ 101, 8166, 2399,  ...,    0,    0,    0],
+        [ 101,  127, 3299,  ...,    0,    0,    0],
+        ...,
+        [ 101, 8138, 2399,  ...,    0,    0,    0],
+        [ 101, 6158, 2154,  ...,    0,    0,    0],
+        [ 101, 4923, 1378,  ...,    0,    0,    0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-07-27 12:28:26,733-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-07-27 12:28:26,736-tools.train_tool-INFO-Training start....
+2022-07-27 12:30:43,950-__main__-INFO-link_start...
+2022-07-27 12:30:44,186-__main__-INFO-CUDA available: True
+2022-07-27 12:30:44,189-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-27 12:34:09,543-tools.init_tool-INFO-Begin to initialize model...
+2022-07-27 12:34:16,178-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-07-27 12:34:16,178-tools.init_tool-INFO-Initialize done.
+2022-07-27 12:34:16,179-__main__-INFO-the size of train_dataset: 1288
+2022-07-27 12:34:16,252-__main__-INFO-an example of train_datatset:
+2022-07-27 12:34:16,252-__main__-INFO-{'tokens': tensor([[ 101, 1369, 3389,  ...,    0,    0,    0],
+        [ 101, 1369, 3389,  ...,    0,    0,    0],
+        [ 101,  677, 6835,  ...,    0,    0,    0],
+        ...,
+        [ 101, 8151, 2399,  ...,    0,    0,    0],
+        [ 101,  753,  510,  ...,    0,    0,    0],
+        [ 101,  123,  510,  ...,    0,    0,    0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-07-27 12:34:16,255-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-07-27 12:34:16,258-tools.train_tool-INFO-Training start....
+2022-07-27 12:34:42,830-__main__-INFO-link_start...
+2022-07-27 12:34:42,974-__main__-INFO-CUDA available: True
+2022-07-27 12:34:42,976-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-27 12:37:28,094-tools.init_tool-INFO-Begin to initialize model...
+2022-07-27 12:37:44,523-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-07-27 12:37:44,524-tools.init_tool-INFO-Initialize done.
+2022-07-27 12:37:44,524-__main__-INFO-the size of train_dataset: 2577
+2022-07-27 12:37:44,570-__main__-INFO-an example of train_datatset:
+2022-07-27 12:37:44,570-__main__-INFO-{'tokens': tensor([[ 101, 3330, 3236,  ...,    0,    0,    0],
+        [ 101, 1762, 1306,  ...,    0,    0,    0],
+        [ 101, 8163, 2399,  ...,    0,    0,    0],
+        ...,
+        [ 101, 8166, 2399,  ...,    0,    0,    0],
+        [ 101, 5632, 6401,  ...,    0,    0,    0],
+        [ 101, 8109, 2399,  ...,    0,    0,    0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-07-27 12:37:44,573-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-07-27 12:37:44,576-tools.train_tool-INFO-Training start....
+2022-07-27 13:17:02,747-tools.eval_tool-INFO-0      train  2577/2577  39:18/ 0:00    618.215 {'acc': 0.3255, 'precision': 0.3255, 'recall': 0.3255, 'f1': 0.3255}
+2022-07-27 13:19:59,677-tools.eval_tool-INFO-0      valid  611/611     2:56/ 0:00    646.110 {'acc': 0.4204, 'precision': 0.4204, 'recall': 0.4204, 'f1': 0.4204}
+2022-07-27 13:52:30,334-__main__-INFO-link_start...
+2022-07-27 13:52:30,412-__main__-INFO-CUDA available: True
+2022-07-27 13:53:00,707-__main__-INFO-link_start...
+2022-07-27 13:53:00,790-__main__-INFO-CUDA available: True
+2022-07-27 13:53:00,793-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-27 13:56:03,195-tools.init_tool-INFO-Begin to initialize model...
+2022-07-27 13:56:16,259-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-07-27 13:56:16,260-tools.init_tool-INFO-Initialize done.
+2022-07-27 13:56:16,260-__main__-INFO-the size of train_dataset: 165
+2022-07-27 13:56:16,774-__main__-INFO-an example of train_datatset:
+2022-07-27 13:56:16,775-__main__-INFO-{'tokens': tensor([[ 101,  122,  510,  ..., 7890, 1767, 1079],
+        [ 101, 8119, 2399,  ...,    0,    0,    0],
+        [ 101, 8151, 2399,  ...,    0,    0,    0],
+        ...,
+        [ 101, 8151, 2399,  ..., 1385, 3791, 2229],
+        [ 101, 8127, 2399,  ...,    0,    0,    0],
+        [ 101, 8112, 2399,  ...,    0,    0,    0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        ...,
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        ...,
+        [  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-07-27 13:57:13,386-__main__-INFO-link_start...
+2022-07-27 13:57:13,461-__main__-INFO-CUDA available: True
+2022-07-27 13:57:13,464-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-27 13:59:04,329-tools.init_tool-INFO-Begin to initialize model...
+2022-07-27 13:59:18,236-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-07-27 13:59:18,236-tools.init_tool-INFO-Initialize done.
+2022-07-27 13:59:18,236-__main__-INFO-the size of train_dataset: 165
+2022-07-27 13:59:18,752-__main__-INFO-an example of train_datatset:
+2022-07-27 13:59:18,752-__main__-INFO-{'tokens': tensor([[ 101, 8127, 2399,  ..., 3118, 7506, 1744],
+        [ 101, 8119, 2399,  ...,    0,    0,    0],
+        [ 101, 8138, 2399,  ...,    0,    0,    0],
+        ...,
+        [ 101, 5307, 2144,  ...,    0,    0,    0],
+        [ 101, 8138, 2399,  ...,    0,    0,    0],
+        [ 101, 6158, 1440,  ..., 4510, 6413,  998]]), 'attention_mask': tensor([[1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1]]), 'labels': tensor([[  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,  71,  72,  73]])}
+2022-07-27 13:59:18,757-tools.train_tool-INFO-Training start....
+2022-07-27 13:59:41,349-__main__-INFO-link_start...
+2022-07-27 13:59:41,451-__main__-INFO-CUDA available: True
+2022-07-27 13:59:41,454-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-27 14:00:10,730-__main__-INFO-link_start...
+2022-07-27 14:00:11,018-__main__-INFO-CUDA available: True
+2022-07-27 14:00:11,021-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-27 14:01:33,287-__main__-INFO-link_start...
+2022-07-27 14:01:33,522-__main__-INFO-CUDA available: True
+2022-07-27 14:01:33,524-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-27 14:02:24,488-__main__-INFO-link_start...
+2022-07-27 14:02:24,563-__main__-INFO-CUDA available: True
+2022-07-27 14:02:24,566-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-27 14:04:03,455-tools.init_tool-INFO-Begin to initialize model...
+2022-07-27 14:04:12,313-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-07-27 14:04:12,314-tools.init_tool-INFO-Initialize done.
+2022-07-27 14:04:12,314-__main__-INFO-the size of train_dataset: 331
+2022-07-27 14:04:12,551-__main__-INFO-an example of train_datatset:
+2022-07-27 14:04:12,551-__main__-INFO-{'tokens': tensor([[ 101, 6158, 1440,  ...,    0,    0,    0],
+        [ 101, 8138, 2399,  ...,    0,    0,    0],
+        [ 101, 8138, 2399,  ...,    0,    0,    0],
+        ...,
+        [ 101, 5632, 8127,  ...,    0,    0,    0],
+        [ 101, 5307, 2144,  ..., 1400, 4895, 2458],
+        [ 101, 8151, 2399,  ..., 7579, 5031, 3428]]), 'attention_mask': tensor([[1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 1, 1, 1]]), 'labels': tensor([[  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,   0, 193, 194],
+        [  0,   0,   0,  ...,   0,   0,   0]])}
+2022-07-27 14:04:12,562-tools.train_tool-INFO-Training start....
+2022-07-27 14:13:19,568-tools.eval_tool-INFO-0      train  331/331     9:07/ 0:00    1257.211{'acc': 0.6822, 'precision': 0.6822, 'recall': 0.6822, 'f1': 0.6822}
+2022-07-27 14:14:20,388-tools.eval_tool-INFO-0      valid  76/76       1:00/ 0:00    410.093 {'acc': 0.7064, 'precision': 0.7064, 'recall': 0.7064, 'f1': 0.7064}
+2022-07-27 14:23:37,481-tools.eval_tool-INFO-1      train  331/331     9:17/ 0:00    364.192 {'acc': 0.7091, 'precision': 0.7091, 'recall': 0.7091, 'f1': 0.7091}
+2022-07-27 14:24:35,084-tools.eval_tool-INFO-1      valid  76/76       0:57/ 0:00    276.247 {'acc': 0.7085, 'precision': 0.7085, 'recall': 0.7085, 'f1': 0.7085}
+2022-07-28 07:20:22,706-__main__-INFO-link_start...
+2022-07-28 07:20:22,945-__main__-INFO-CUDA available: True
+2022-07-28 07:20:22,947-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-28 07:21:16,078-tools.init_tool-INFO-Begin to initialize model...
+2022-07-28 07:21:24,125-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-07-28 07:21:24,125-tools.init_tool-INFO-Initialize done.
+2022-07-28 07:21:24,125-__main__-INFO-the size of train_dataset: 331
+2022-07-28 07:21:24,323-__main__-INFO-an example of train_datatset:
+2022-07-28 07:21:24,323-__main__-INFO-{'tokens': tensor([[ 101, 8127, 2399,  ..., 1286,  129, 3198],
+        [ 101, 8119, 2399,  ...,    0,    0,    0],
+        [ 101, 3959, 1298,  ...,    0,    0,    0],
+        ...,
+        [ 101,  677, 3862,  ..., 1139, 1057, 6804],
+        [ 101, 8112, 2399,  ...,    0,    0,    0],
+        [ 101, 8119, 2399,  ...,    0,    0,    0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        ...,
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        ...,
+        [  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-07-28 07:21:24,329-tools.train_tool-INFO-Training start....
+2022-07-28 07:23:34,095-__main__-INFO-link_start...
+2022-07-28 07:23:34,183-__main__-INFO-CUDA available: True
+2022-07-28 07:23:34,186-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-28 07:24:31,444-__main__-INFO-link_start...
+2022-07-28 07:24:31,511-__main__-INFO-CUDA available: True
+2022-07-28 07:24:31,513-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-28 07:24:45,670-__main__-INFO-link_start...
+2022-07-28 07:24:45,741-__main__-INFO-CUDA available: True
+2022-07-28 07:24:45,744-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-28 07:25:47,829-tools.init_tool-INFO-Begin to initialize model...
+2022-07-28 07:25:54,592-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-07-28 07:25:54,593-tools.init_tool-INFO-Initialize done.
+2022-07-28 07:25:54,593-__main__-INFO-the size of train_dataset: 331
+2022-07-28 07:25:54,843-__main__-INFO-an example of train_datatset:
+2022-07-28 07:25:54,844-__main__-INFO-{'tokens': tensor([[ 101, 8119, 2399,  ..., 3890,  860, 8020],
+        [ 101, 8138, 2399,  ...,    0,    0,    0],
+        [ 101, 6158, 1440,  ...,  782, 3696, 2355],
+        ...,
+        [ 101, 8112, 2399,  ...,    0,    0,    0],
+        [ 101, 8138, 2399,  ...,    0,    0,    0],
+        [ 101, 8163, 2399,  ..., 7368, 1161, 1104]]), 'attention_mask': tensor([[1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1]]), 'labels': tensor([[  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,   0,   0,   0],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,   0,   0,   0]])}
+2022-07-28 07:25:54,849-tools.train_tool-INFO-Training start....
+2022-07-28 07:28:38,123-__main__-INFO-link_start...
+2022-07-28 07:28:38,203-__main__-INFO-CUDA available: True
+2022-07-28 07:28:38,205-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-28 07:29:34,516-tools.init_tool-INFO-Begin to initialize model...
+2022-07-28 07:29:42,701-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-07-28 07:29:42,701-tools.init_tool-INFO-Initialize done.
+2022-07-28 07:29:42,701-__main__-INFO-the size of train_dataset: 331
+2022-07-28 07:29:43,008-__main__-INFO-an example of train_datatset:
+2022-07-28 07:29:43,008-__main__-INFO-{'tokens': tensor([[ 101, 8138, 2399,  ...,    0,    0,    0],
+        [ 101, 8301, 2399,  ...,    0,    0,    0],
+        [ 101, 8109, 2399,  ...,  792, 5305,  100],
+        ...,
+        [ 101, 6158, 1440,  ...,    0,    0,    0],
+        [ 101, 8138, 2399,  ...,    0,    0,    0],
+        [ 101, 8119, 2399,  ...,    0,    0,    0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,  75,  76,   0],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-07-28 07:29:43,010-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-07-28 07:29:43,014-tools.train_tool-INFO-Training start....
+2022-07-28 07:36:12,647-tools.eval_tool-INFO-0      train  331/331     6:28/ 0:00    1148.104{'acc': 0.2059, 'precision': 0.4686, 'recall': 0.2059, 'f1': 0.2708}
+2022-07-28 07:37:04,992-tools.eval_tool-INFO-0      valid  76/76       0:52/ 0:00    341.548 {'acc': 0.7074, 'precision': 0.7074, 'recall': 0.7074, 'f1': 0.7074}
+2022-07-28 07:43:36,472-tools.eval_tool-INFO-1      train  331/331     6:30/ 0:00    327.951 {'acc': 0.5857, 'precision': 0.7167, 'recall': 0.5857, 'f1': 0.6166}
+2022-07-28 07:44:28,715-tools.eval_tool-INFO-1      valid  76/76       0:52/ 0:00    267.805 {'acc': 0.7086, 'precision': 0.7086, 'recall': 0.7086, 'f1': 0.7086}
+2022-07-28 07:51:01,735-tools.eval_tool-INFO-2      train  331/331     6:31/ 0:00    242.414 {'acc': 0.6737, 'precision': 0.7281, 'recall': 0.6737, 'f1': 0.6837}
+2022-07-28 07:51:54,251-tools.eval_tool-INFO-2      valid  76/76       0:52/ 0:00    258.282 {'acc': 0.7085, 'precision': 0.7085, 'recall': 0.7085, 'f1': 0.7085}
+2022-07-28 07:58:26,674-tools.eval_tool-INFO-3      train  331/331     6:31/ 0:00    202.794 {'acc': 0.7168, 'precision': 0.7523, 'recall': 0.7168, 'f1': 0.7171}
+2022-07-28 07:59:19,185-tools.eval_tool-INFO-3      valid  76/76       0:52/ 0:00    259.262 {'acc': 0.7091, 'precision': 0.7091, 'recall': 0.7091, 'f1': 0.7091}
+2022-07-28 08:05:53,912-tools.eval_tool-INFO-4      train  331/331     6:33/ 0:00    174.191 {'acc': 0.7535, 'precision': 0.7666, 'recall': 0.7535, 'f1': 0.7471}
+2022-07-28 09:12:46,038-__main__-INFO-link_start...
+2022-07-28 09:12:46,116-__main__-INFO-CUDA available: True
+2022-07-28 09:12:46,118-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-28 09:13:30,632-tools.init_tool-INFO-Begin to initialize model...
+2022-07-28 09:13:38,230-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-07-28 09:13:38,230-tools.init_tool-INFO-Initialize done.
+2022-07-28 09:13:38,230-__main__-INFO-the size of train_dataset: 331
+2022-07-28 09:13:38,487-__main__-INFO-an example of train_datatset:
+2022-07-28 09:13:38,488-__main__-INFO-{'tokens': tensor([[ 101, 8119, 2399,  ...,    0,    0,    0],
+        [ 101, 4306, 5389,  ...,    0,    0,    0],
+        [ 101, 8112, 2399,  ..., 3152, 1265, 8020],
+        ...,
+        [ 101, 8020,  671,  ...,    0,    0,    0],
+        [ 101, 6158, 1440,  ..., 5635, 6158, 1440],
+        [ 101, 8119, 2399,  ...,    0,    0,    0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,   0,   0,   0],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-07-28 09:13:38,502-tools.train_tool-INFO-Training start....
+2022-07-28 09:20:10,330-tools.eval_tool-INFO-0      train  331/331     6:30/ 0:00    1196.025{'acc': 0.1953, 'precision': 0.4806, 'recall': 0.1953, 'f1': 0.2636}
+2022-07-28 09:21:01,199-tools.eval_tool-INFO-0      valid  76/76       0:50/ 0:00    358.918 {'acc': 0.7069, 'precision': 0.7069, 'recall': 0.7069, 'f1': 0.7069}
+2022-07-28 09:27:30,785-tools.eval_tool-INFO-1      train  331/331     6:28/ 0:00    337.371 {'acc': 0.5852, 'precision': 0.7405, 'recall': 0.5852, 'f1': 0.6257}
+2022-07-28 09:28:20,771-tools.eval_tool-INFO-1      valid  76/76       0:49/ 0:00    280.707 {'acc': 0.7077, 'precision': 0.7077, 'recall': 0.7077, 'f1': 0.7077}
+2022-07-28 09:34:47,877-tools.eval_tool-INFO-2      train  331/331     6:25/ 0:00    245.701 {'acc': 0.6727, 'precision': 0.7646, 'recall': 0.6727, 'f1': 0.7005}
+2022-07-28 09:35:38,695-tools.eval_tool-INFO-2      valid  76/76       0:50/ 0:00    256.004 {'acc': 0.7088, 'precision': 0.7088, 'recall': 0.7088, 'f1': 0.7088}
+2022-07-28 09:47:20,605-__main__-INFO-link_start...
+2022-07-28 09:47:20,808-__main__-INFO-CUDA available: True
+2022-07-28 09:47:20,810-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-28 09:48:04,912-tools.init_tool-INFO-Begin to initialize model...
+2022-07-28 09:48:12,776-tools.init_tool-WARNING-Cannot load checkpoint file with error [Errno 2] No such file or directory: './done_models/teacher_model/0.pkl'
+2022-07-28 09:48:12,777-tools.init_tool-INFO-Initialize done.
+2022-07-28 09:48:12,777-__main__-INFO-the size of train_dataset: 331
+2022-07-28 09:48:12,961-__main__-INFO-an example of train_datatset:
+2022-07-28 09:48:12,962-__main__-INFO-{'tokens': tensor([[ 101, 8112, 2399,  ...,    0,    0,    0],
+        [ 101, 8163, 2399,  ..., 4509, 6435, 2821],
+        [ 101, 6158, 1440,  ...,    0,    0,    0],
+        ...,
+        [ 101, 8163, 2399,  ...,    0,    0,    0],
+        [ 101, 8109, 2399,  ...,    0,    0,    0],
+        [ 101, 8109, 2399,  ...,    0,    0,    0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,  99, 100,   0],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-07-28 09:48:12,964-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-07-28 09:48:12,967-tools.train_tool-INFO-Training start....
+2022-07-28 09:49:07,526-__main__-INFO-link_start...
+2022-07-28 09:49:07,606-__main__-INFO-CUDA available: True
+2022-07-28 09:49:07,608-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-28 09:49:50,946-tools.init_tool-INFO-Begin to initialize model...
+2022-07-28 09:49:58,689-tools.init_tool-INFO-Initialize done.
+2022-07-28 09:49:58,689-__main__-INFO-the size of train_dataset: 331
+2022-07-28 09:49:58,915-__main__-INFO-an example of train_datatset:
+2022-07-28 09:49:58,915-__main__-INFO-{'tokens': tensor([[ 101, 8127, 2399,  ..., 8161, 4989, 3175],
+        [ 101, 8127, 2399,  ...,    0,    0,    0],
+        [ 101, 8127, 2399,  ...,    0,    0,    0],
+        ...,
+        [ 101, 8387, 2399,  ...,    0,    0,    0],
+        [ 101, 8127, 2399,  ...,    0,    0,    0],
+        [ 101, 6158, 1440,  ...,    0,    0,    0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-07-28 09:49:58,918-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-07-28 09:49:58,921-tools.train_tool-INFO-Training start....
+2022-07-28 10:37:20,332-__main__-INFO-link_start...
+2022-07-28 10:37:20,591-__main__-INFO-CUDA available: True
+2022-07-28 10:37:20,594-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-28 10:38:01,735-tools.init_tool-INFO-Begin to initialize model...
+2022-07-28 10:38:08,639-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-07-28 10:38:08,639-tools.init_tool-INFO-Initialize done.
+2022-07-28 10:38:08,639-__main__-INFO-the size of train_dataset: 331
+2022-07-28 10:38:08,881-__main__-INFO-an example of train_datatset:
+2022-07-28 10:38:08,881-__main__-INFO-{'tokens': tensor([[ 101, 8151, 2399,  ...,    0,    0,    0],
+        [ 101, 8112, 2399,  ...,    0,    0,    0],
+        [ 101, 8112, 2399,  ...,    0,    0,    0],
+        ...,
+        [ 101, 8020,  671,  ...,    0,    0,    0],
+        [ 101,  510, 6158,  ..., 3178, 2199,  121],
+        [ 101, 8112, 2399,  ...,    0,    0,    0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-07-28 10:38:08,883-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-07-28 10:38:08,886-tools.train_tool-INFO-Training start....
+2022-07-28 16:04:51,557-__main__-INFO-link_start...
+2022-07-28 16:04:51,606-__main__-INFO-CUDA available: True
+2022-07-28 16:04:51,609-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-28 16:05:52,573-tools.init_tool-INFO-Begin to initialize model...
+2022-07-28 16:06:00,336-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-07-28 16:06:00,336-tools.init_tool-INFO-Initialize done.
+2022-07-28 16:06:00,337-__main__-INFO-the size of train_dataset: 331
+2022-07-28 16:06:00,655-__main__-INFO-an example of train_datatset:
+2022-07-28 16:06:00,655-__main__-INFO-{'tokens': tensor([[ 101, 8163, 2399,  ..., 6958, 3378, 3378],
+        [ 101, 8127, 2399,  ..., 6132, 5106, 8108],
+        [ 101, 7353, 2372,  ...,    0,    0,    0],
+        ...,
+        [ 101, 8112, 2399,  ...,    0,    0,    0],
+        [ 101, 8213, 2399,  ..., 5635, 8127, 2399],
+        [ 101, 8138, 2399,  ...,    0,    0,    0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-07-28 16:06:00,658-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-07-28 16:06:00,661-tools.train_tool-INFO-Training start....
+2022-07-28 16:12:14,868-tools.eval_tool-INFO-0      train  331/331     6:12/ 0:00    1151.308{'acc': 0.2178, 'precision': 0.4628, 'recall': 0.2178, 'f1': 0.2829}
+2022-07-28 16:13:05,783-tools.eval_tool-INFO-0      valid  76/76       0:50/ 0:00    396.664 {'acc': 0.7067, 'precision': 0.7067, 'recall': 0.7067, 'f1': 0.7067}
+2022-07-29 03:41:57,415-__main__-INFO-link_start...
+2022-07-29 03:41:57,468-__main__-INFO-CUDA available: True
+2022-07-29 03:41:57,471-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-29 03:42:37,746-tools.init_tool-INFO-Begin to initialize model...
+2022-07-29 03:42:44,997-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-07-29 03:42:44,998-tools.init_tool-INFO-Initialize done.
+2022-07-29 03:42:44,998-__main__-INFO-the size of train_dataset: 331
+2022-07-29 03:42:45,226-__main__-INFO-an example of train_datatset:
+2022-07-29 03:42:45,226-__main__-INFO-{'tokens': tensor([[ 101, 8119, 2399,  ...,    0,    0,    0],
+        [ 101, 5307, 2144,  ...,  119, 8111, 1046],
+        [ 101, 8127, 2399,  ..., 5052, 2792, 4638],
+        ...,
+        [ 101, 8151, 2399,  ...,    0,    0,    0],
+        [ 101, 8138, 2399,  ..., 6387, 8024, 6158],
+        [ 101, 6158, 1440,  ...,    0,    0,    0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 1, 1, 1],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ...,   0,   0,   0],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-07-29 03:42:45,228-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-07-29 03:42:45,231-tools.train_tool-INFO-Training start....
+2022-07-29 03:49:04,371-tools.eval_tool-INFO-0      train  331/331     6:17/ 0:00    1651.279{'acc': 0.084, 'precision': 0.36, 'recall': 0.084, 'f1': 0.1273}
+2022-07-29 03:49:56,231-tools.eval_tool-INFO-0      valid  76/76       0:51/ 0:00    464.426 {'acc': 0.704, 'precision': 0.704, 'recall': 0.704, 'f1': 0.704}
+2022-07-29 03:56:20,871-tools.eval_tool-INFO-1      train  331/331     6:22/ 0:00    385.084 {'acc': 0.537, 'precision': 0.7063, 'recall': 0.537, 'f1': 0.5794}
+2022-07-29 03:57:12,927-tools.eval_tool-INFO-1      valid  76/76       0:52/ 0:00    279.228 {'acc': 0.7086, 'precision': 0.7086, 'recall': 0.7086, 'f1': 0.7086}
+2022-07-29 04:03:38,336-tools.eval_tool-INFO-2      train  331/331     6:23/ 0:00    260.695 {'acc': 0.6629, 'precision': 0.7673, 'recall': 0.6629, 'f1': 0.6935}
+2022-07-29 04:04:30,662-tools.eval_tool-INFO-2      valid  76/76       0:52/ 0:00    257.851 {'acc': 0.7083, 'precision': 0.7083, 'recall': 0.7083, 'f1': 0.7083}
+2022-07-29 04:10:54,853-tools.eval_tool-INFO-3      train  331/331     6:22/ 0:00    215.953 {'acc': 0.7119, 'precision': 0.7945, 'recall': 0.7119, 'f1': 0.7388}
+2022-07-29 04:11:47,103-tools.eval_tool-INFO-3      valid  76/76       0:52/ 0:00    268.415 {'acc': 0.7073, 'precision': 0.7073, 'recall': 0.7073, 'f1': 0.7073}
+2022-07-29 04:18:09,563-tools.eval_tool-INFO-4      train  331/331     6:21/ 0:00    185.432 {'acc': 0.7506, 'precision': 0.822, 'recall': 0.7506, 'f1': 0.7728}
+2022-07-29 04:19:02,192-tools.eval_tool-INFO-4      valid  76/76       0:52/ 0:00    261.476 {'acc': 0.7084, 'precision': 0.7084, 'recall': 0.7084, 'f1': 0.7084}
+2022-07-29 04:25:25,599-tools.eval_tool-INFO-5      train  331/331     6:22/ 0:00    164.822 {'acc': 0.7754, 'precision': 0.838, 'recall': 0.7754, 'f1': 0.7939}
+2022-07-29 04:26:17,428-tools.eval_tool-INFO-5      valid  76/76       0:51/ 0:00    305.427 {'acc': 0.7066, 'precision': 0.7066, 'recall': 0.7066, 'f1': 0.7066}
+2022-07-29 04:32:38,644-tools.eval_tool-INFO-6      train  331/331     6:20/ 0:00    152.369 {'acc': 0.7956, 'precision': 0.845, 'recall': 0.7956, 'f1': 0.8107}
+2022-07-29 04:33:30,817-tools.eval_tool-INFO-6      valid  76/76       0:52/ 0:00    329.923 {'acc': 0.707, 'precision': 0.707, 'recall': 0.707, 'f1': 0.707}
+2022-07-29 04:39:49,768-tools.eval_tool-INFO-7      train  331/331     6:17/ 0:00    148.203 {'acc': 0.8052, 'precision': 0.853, 'recall': 0.8052, 'f1': 0.8205}
+2022-07-29 04:40:41,597-tools.eval_tool-INFO-7      valid  76/76       0:51/ 0:00    299.572 {'acc': 0.7087, 'precision': 0.7087, 'recall': 0.7087, 'f1': 0.7087}
+2022-07-29 04:47:01,650-tools.eval_tool-INFO-8      train  331/331     6:18/ 0:00    133.070 {'acc': 0.8301, 'precision': 0.8609, 'recall': 0.8301, 'f1': 0.8403}
+2022-07-29 04:47:53,361-tools.eval_tool-INFO-8      valid  76/76       0:51/ 0:00    319.647 {'acc': 0.7078, 'precision': 0.7078, 'recall': 0.7078, 'f1': 0.7078}
+2022-07-29 04:54:16,563-tools.eval_tool-INFO-9      train  331/331     6:22/ 0:00    123.541 {'acc': 0.8396, 'precision': 0.8658, 'recall': 0.8396, 'f1': 0.8487}
+2022-07-29 04:55:08,177-tools.eval_tool-INFO-9      valid  76/76       0:51/ 0:00    340.893 {'acc': 0.7077, 'precision': 0.7077, 'recall': 0.7077, 'f1': 0.7077}
+2022-07-29 05:01:29,189-tools.eval_tool-INFO-10     train  331/331     6:19/ 0:00    120.897 {'acc': 0.8378, 'precision': 0.8644, 'recall': 0.8378, 'f1': 0.8468}
+2022-07-29 05:02:21,400-tools.eval_tool-INFO-10     valid  76/76       0:52/ 0:00    334.838 {'acc': 0.7022, 'precision': 0.7022, 'recall': 0.7022, 'f1': 0.7022}
+2022-07-29 05:04:12,972-__main__-INFO-link_start...
+2022-07-29 05:04:13,020-__main__-INFO-CUDA available: True
+2022-07-29 05:04:13,023-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-07-29 05:05:02,737-tools.init_tool-INFO-Begin to initialize model...
+2022-07-29 05:05:09,754-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-07-29 05:05:09,754-tools.init_tool-INFO-Initialize done.
+2022-07-29 05:05:09,754-__main__-INFO-the size of train_dataset: 331
+2022-07-29 05:05:10,021-__main__-INFO-an example of train_datatset:
+2022-07-29 05:05:10,021-__main__-INFO-{'tokens': tensor([[ 101, 6158, 1440,  ...,    0,    0,    0],
+        [ 101, 8163, 2399,  ...,    0,    0,    0],
+        [ 101, 6158, 1440,  ...,    0,    0,    0],
+        ...,
+        [ 101, 6158, 1440,  ...,    0,    0,    0],
+        [ 101, 8109, 2399,  ...,    0,    0,    0],
+        [ 101, 6158, 1440,  ...,    0,    0,    0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-07-29 05:05:10,023-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-07-29 05:05:10,036-tools.train_tool-INFO-Training start....
+2022-07-29 05:11:33,421-tools.eval_tool-INFO-0      train  331/331     6:21/ 0:00    2540.643{'acc': 0.202, 'precision': 0.5377, 'recall': 0.202, 'f1': 0.2769}
+2022-07-29 05:12:24,052-tools.eval_tool-INFO-0      valid  76/76       0:50/ 0:00    766.737 {'acc': 0.7056, 'precision': 0.7056, 'recall': 0.7056, 'f1': 0.7056}
+2022-07-29 05:18:47,076-tools.eval_tool-INFO-1      train  331/331     6:21/ 0:00    680.911 {'acc': 0.5715, 'precision': 0.7261, 'recall': 0.5715, 'f1': 0.6141}
+2022-07-29 05:19:37,541-tools.eval_tool-INFO-1      valid  76/76       0:50/ 0:00    592.810 {'acc': 0.7066, 'precision': 0.7066, 'recall': 0.7066, 'f1': 0.7066}
+2022-07-29 05:25:57,987-tools.eval_tool-INFO-2      train  331/331     6:19/ 0:00    497.659 {'acc': 0.6638, 'precision': 0.7671, 'recall': 0.6638, 'f1': 0.6945}
+2022-07-29 05:26:48,652-tools.eval_tool-INFO-2      valid  76/76       0:50/ 0:00    530.668 {'acc': 0.7067, 'precision': 0.7067, 'recall': 0.7067, 'f1': 0.7067}
+2022-07-29 05:33:12,660-tools.eval_tool-INFO-3      train  331/331     6:22/ 0:00    411.292 {'acc': 0.7084, 'precision': 0.7925, 'recall': 0.7084, 'f1': 0.7361}
+2022-07-29 05:34:03,265-tools.eval_tool-INFO-3      valid  76/76       0:50/ 0:00    490.725 {'acc': 0.7076, 'precision': 0.7076, 'recall': 0.7076, 'f1': 0.7076}
+2022-07-29 05:40:26,688-tools.eval_tool-INFO-4      train  331/331     6:21/ 0:00    590.715 {'acc': 0.6925, 'precision': 0.8013, 'recall': 0.6925, 'f1': 0.7327}
+2022-07-29 05:41:17,627-tools.eval_tool-INFO-4      valid  76/76       0:50/ 0:00    516.203 {'acc': 0.708, 'precision': 0.708, 'recall': 0.708, 'f1': 0.708}
+2022-07-29 05:47:40,588-tools.eval_tool-INFO-5      train  331/331     6:21/ 0:00    347.240 {'acc': 0.7543, 'precision': 0.819, 'recall': 0.7543, 'f1': 0.7749}
+2022-07-29 05:48:31,035-tools.eval_tool-INFO-5      valid  76/76       0:50/ 0:00    520.479 {'acc': 0.7079, 'precision': 0.7079, 'recall': 0.7079, 'f1': 0.7079}
+2022-07-29 05:54:52,636-tools.eval_tool-INFO-6      train  331/331     6:19/ 0:00    296.502 {'acc': 0.7766, 'precision': 0.833, 'recall': 0.7766, 'f1': 0.7935}
+2022-07-29 05:55:43,548-tools.eval_tool-INFO-6      valid  76/76       0:50/ 0:00    535.443 {'acc': 0.7074, 'precision': 0.7074, 'recall': 0.7074, 'f1': 0.7074}
+2022-07-29 06:02:07,104-tools.eval_tool-INFO-7      train  331/331     6:21/ 0:00    272.924 {'acc': 0.7953, 'precision': 0.8495, 'recall': 0.7953, 'f1': 0.8112}
+2022-07-29 06:02:58,177-tools.eval_tool-INFO-7      valid  76/76       0:51/ 0:00    546.864 {'acc': 0.7081, 'precision': 0.7081, 'recall': 0.7081, 'f1': 0.7081}
+2022-08-01 15:19:32,237-__main__-INFO-link_start...
+2022-08-01 15:19:32,286-__main__-INFO-CUDA available: True
+2022-08-01 15:19:32,289-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-08-01 15:19:35,849-tools.init_tool-INFO-Begin to initialize model...
+2022-08-01 15:19:42,083-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-08-01 15:19:42,083-tools.init_tool-INFO-Initialize done.
+2022-08-01 15:19:42,083-__main__-INFO-the size of train_dataset: 331
+2022-08-01 15:19:42,264-__main__-INFO-an example of train_datatset:
+2022-08-01 15:19:42,264-__main__-INFO-{'tokens': tensor([[  101, 13221,  8165,  ..., 23186,  1956, 10001],
+        [  101, 16965,  3556,  ...,     0,     0,     0],
+        [  101,   100,  6158,  ...,     0,     0,     0],
+        ...,
+        [  101, 16965,  3556,  ...,     0,     0,     0],
+        [  101,   100,  6158,  ...,     0,     0,     0],
+        [  101,   100,  6158,  ...,     0,     0,     0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-08-01 15:19:42,270-tools.train_tool-INFO-Training start....
+2022-08-01 15:26:46,715-tools.eval_tool-INFO-0      train  331/331     7:02/ 0:00    4780.071{'acc': 0.0045, 'precision': 0.0049, 'recall': 0.0045, 'f1': 0.0037}
+2022-08-01 15:27:42,080-tools.eval_tool-INFO-0      valid  76/76       0:55/ 0:00    3885.187{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 15:34:45,098-tools.eval_tool-INFO-1      train  331/331     7:01/ 0:00    3016.324{'acc': 0.0093, 'precision': 0.1213, 'recall': 0.0093, 'f1': 0.0115}
+2022-08-01 15:35:39,845-tools.eval_tool-INFO-1      valid  76/76       0:54/ 0:00    2282.665{'acc': 0.6755, 'precision': 0.6755, 'recall': 0.6755, 'f1': 0.6755}
+2022-08-01 15:42:37,651-tools.eval_tool-INFO-2      train  331/331     6:56/ 0:00    1786.623{'acc': 0.1874, 'precision': 0.4194, 'recall': 0.1874, 'f1': 0.2151}
+2022-08-01 15:43:33,379-tools.eval_tool-INFO-2      valid  76/76       0:55/ 0:00    1157.019{'acc': 0.696, 'precision': 0.696, 'recall': 0.696, 'f1': 0.696}
+2022-08-01 15:50:33,302-tools.eval_tool-INFO-3      train  331/331     6:58/ 0:00    2339.609{'acc': 0.1944, 'precision': 0.4768, 'recall': 0.1944, 'f1': 0.2494}
+2022-08-01 15:51:28,040-tools.eval_tool-INFO-3      valid  76/76       0:54/ 0:00    1379.138{'acc': 0.6923, 'precision': 0.6923, 'recall': 0.6923, 'f1': 0.6923}
+2022-08-01 15:58:21,905-tools.eval_tool-INFO-4      train  331/331     6:52/ 0:00    1232.432{'acc': 0.3382, 'precision': 0.5242, 'recall': 0.3382, 'f1': 0.3674}
+2022-08-01 15:59:18,470-tools.eval_tool-INFO-4      valid  76/76       0:56/ 0:00    993.891 {'acc': 0.6986, 'precision': 0.6986, 'recall': 0.6986, 'f1': 0.6986}
+2022-08-01 16:06:22,750-tools.eval_tool-INFO-5      train  331/331     7:02/ 0:00    960.695 {'acc': 0.4332, 'precision': 0.5754, 'recall': 0.4332, 'f1': 0.4591}
+2022-08-01 16:07:17,513-tools.eval_tool-INFO-5      valid  76/76       0:54/ 0:00    843.595 {'acc': 0.7012, 'precision': 0.7012, 'recall': 0.7012, 'f1': 0.7012}
+2022-08-01 16:14:16,002-tools.eval_tool-INFO-6      train  331/331     6:56/ 0:00    2824.034{'acc': 0.2064, 'precision': 0.6079, 'recall': 0.2064, 'f1': 0.2938}
+2022-08-01 16:15:11,106-tools.eval_tool-INFO-6      valid  76/76       0:55/ 0:00    4007.482{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 16:22:09,363-tools.eval_tool-INFO-7      train  331/331     6:56/ 0:00    2805.386{'acc': 0.1161, 'precision': 0.5053, 'recall': 0.1161, 'f1': 0.1737}
+2022-08-01 16:23:04,818-tools.eval_tool-INFO-7      valid  76/76       0:55/ 0:00    1055.502{'acc': 0.6964, 'precision': 0.6964, 'recall': 0.6964, 'f1': 0.6964}
+2022-08-01 16:30:36,595-__main__-INFO-link_start...
+2022-08-01 16:30:36,639-__main__-INFO-CUDA available: True
+2022-08-01 16:30:36,642-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-08-01 16:30:40,286-tools.init_tool-INFO-Begin to initialize model...
+2022-08-01 16:30:46,475-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-08-01 16:30:46,476-tools.init_tool-INFO-Initialize done.
+2022-08-01 16:30:46,476-__main__-INFO-the size of train_dataset: 331
+2022-08-01 16:30:48,876-__main__-INFO-an example of train_datatset:
+2022-08-01 16:30:48,876-__main__-INFO-{'tokens': tensor([[  101,   120, 23188,  ...,     0,     0,     0],
+        [  101,   100,  6158,  ...,     0,     0,     0],
+        [  101,   100,  6158,  ...,     0,     0,     0],
+        ...,
+        [  101, 16965,  3556,  ..., 12318,  3495,  2019],
+        [  101,   100,  6158,  ...,     0,     0,     0],
+        [  101,   100,  6158,  ...,     0,     0,     0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        ...,
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        ...,
+        [  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-08-01 16:30:49,300-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-08-01 16:30:49,305-tools.train_tool-INFO-Training start....
+2022-08-01 16:36:30,998-tools.eval_tool-INFO-0      train  331/331     5:39/ 0:00    5570.560{'acc': 0.0045, 'precision': 0.0047, 'recall': 0.0045, 'f1': 0.0036}
+2022-08-01 16:37:12,520-tools.eval_tool-INFO-0      valid  76/76       0:41/ 0:00    3300.657{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 16:42:53,415-tools.eval_tool-INFO-1      train  331/331     5:38/ 0:00    3250.892{'acc': 0.0058, 'precision': 0.0297, 'recall': 0.0058, 'f1': 0.0058}
+2022-08-01 16:43:32,054-tools.eval_tool-INFO-1      valid  76/76       0:38/ 0:00    3730.000{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 16:49:24,245-tools.eval_tool-INFO-2      train  331/331     5:49/ 0:00    3016.736{'acc': 0.0132, 'precision': 0.0863, 'recall': 0.0132, 'f1': 0.0152}
+2022-08-01 16:50:04,968-tools.eval_tool-INFO-2      valid  76/76       0:40/ 0:00    14055.530{'acc': 0.6645, 'precision': 0.6645, 'recall': 0.6645, 'f1': 0.6645}
+2022-08-01 16:55:56,219-tools.eval_tool-INFO-3      train  331/331     5:49/ 0:00    4373.260{'acc': 0.0073, 'precision': 0.0629, 'recall': 0.0073, 'f1': 0.0085}
+2022-08-01 16:56:36,317-tools.eval_tool-INFO-3      valid  76/76       0:40/ 0:00    2633.902{'acc': 0.6677, 'precision': 0.6677, 'recall': 0.6677, 'f1': 0.6677}
+2022-08-01 17:02:16,665-tools.eval_tool-INFO-4      train  331/331     5:38/ 0:00    2654.202{'acc': 0.0233, 'precision': 0.1083, 'recall': 0.0233, 'f1': 0.028}
+2022-08-01 17:02:56,366-tools.eval_tool-INFO-4      valid  76/76       0:39/ 0:00    2397.856{'acc': 0.6718, 'precision': 0.6718, 'recall': 0.6718, 'f1': 0.6718}
+2022-08-01 17:08:45,765-tools.eval_tool-INFO-5      train  331/331     5:46/ 0:00    2455.384{'acc': 0.0407, 'precision': 0.1811, 'recall': 0.0407, 'f1': 0.0466}
+2022-08-01 17:09:25,451-tools.eval_tool-INFO-5      valid  76/76       0:39/ 0:00    2232.570{'acc': 0.6746, 'precision': 0.6746, 'recall': 0.6746, 'f1': 0.6746}
+2022-08-01 17:15:04,061-tools.eval_tool-INFO-6      train  331/331     5:36/ 0:00    5036.616{'acc': 0.0656, 'precision': 0.113, 'recall': 0.0656, 'f1': 0.0559}
+2022-08-01 17:15:43,746-tools.eval_tool-INFO-6      valid  76/76       0:39/ 0:00    23787.791{'acc': 0.2328, 'precision': 0.2328, 'recall': 0.2328, 'f1': 0.2328}
+2022-08-01 17:21:23,866-tools.eval_tool-INFO-7      train  331/331     5:37/ 0:00    5261.567{'acc': 0.0047, 'precision': 0.011, 'recall': 0.0047, 'f1': 0.0039}
+2022-08-01 17:22:02,882-tools.eval_tool-INFO-7      valid  76/76       0:39/ 0:00    4112.646{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 17:25:59,961-__main__-INFO-link_start...
+2022-08-01 17:26:00,011-__main__-INFO-CUDA available: True
+2022-08-01 17:26:00,014-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-08-01 17:26:49,280-tools.init_tool-INFO-Begin to initialize model...
+2022-08-01 17:26:58,268-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-08-01 17:26:58,268-tools.init_tool-INFO-Initialize done.
+2022-08-01 17:26:58,268-__main__-INFO-the size of train_dataset: 331
+2022-08-01 17:27:00,747-__main__-INFO-an example of train_datatset:
+2022-08-01 17:27:00,747-__main__-INFO-{'tokens': tensor([[ 101, 8151, 2399,  ...,    0,    0,    0],
+        [ 101, 8138, 2399,  ..., 1385,  985, 6820],
+        [ 101, 8127, 2399,  ...,    0,    0,    0],
+        ...,
+        [ 101, 8163, 2399,  ...,    0,    0,    0],
+        [ 101, 8112, 2399,  ..., 8024, 3389, 2807],
+        [ 101, 8112, 2399,  ...,    0,    0,    0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,   0,  45,  46],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,   0,  17,  18],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-08-01 17:27:01,089-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-08-01 17:27:01,091-tools.train_tool-INFO-Training start....
+2022-08-01 17:32:39,885-tools.eval_tool-INFO-0      train  331/331     5:36/ 0:00    3725.326{'acc': 0.0263, 'precision': 0.1709, 'recall': 0.0263, 'f1': 0.0388}
+2022-08-01 17:33:19,817-tools.eval_tool-INFO-0      valid  76/76       0:39/ 0:00    1987.868{'acc': 0.6871, 'precision': 0.6871, 'recall': 0.6871, 'f1': 0.6871}
+2022-08-01 17:38:59,259-tools.eval_tool-INFO-1      train  331/331     5:37/ 0:00    6939.093{'acc': 0.0247, 'precision': 0.1321, 'recall': 0.0247, 'f1': 0.0311}
+2022-08-01 17:39:39,236-tools.eval_tool-INFO-1      valid  76/76       0:39/ 0:00    3364.546{'acc': 0.6677, 'precision': 0.6677, 'recall': 0.6677, 'f1': 0.6677}
+2022-08-01 17:45:19,845-tools.eval_tool-INFO-2      train  331/331     5:38/ 0:00    7679.779{'acc': 0.0236, 'precision': 0.0953, 'recall': 0.0236, 'f1': 0.027}
+2022-08-01 17:45:59,494-tools.eval_tool-INFO-2      valid  76/76       0:39/ 0:00    7165.138{'acc': 0.6705, 'precision': 0.6705, 'recall': 0.6705, 'f1': 0.6705}
+2022-08-01 17:50:31,929-__main__-INFO-link_start...
+2022-08-01 17:50:31,987-__main__-INFO-CUDA available: True
+2022-08-01 17:50:31,990-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-08-01 17:51:09,289-tools.init_tool-INFO-Begin to initialize model...
+2022-08-01 17:51:17,328-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-08-01 17:51:17,328-tools.init_tool-INFO-Initialize done.
+2022-08-01 17:51:17,329-__main__-INFO-the size of train_dataset: 331
+2022-08-01 17:51:19,681-__main__-INFO-an example of train_datatset:
+2022-08-01 17:51:19,681-__main__-INFO-{'tokens': tensor([[ 101, 8170, 2399,  ..., 2797, 1947,  677],
+        [ 101, 8112, 2399,  ...,    0,    0,    0],
+        [ 101,  677, 3862,  ...,    0,    0,    0],
+        ...,
+        [ 101, 8138, 2399,  ...,    0,    0,    0],
+        [ 101, 6158, 1440,  ...,    0,    0,    0],
+        [ 101,  794, 8119,  ...,    0,    0,    0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-08-01 17:51:20,053-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-08-01 17:51:20,056-tools.train_tool-INFO-Training start....
+2022-08-01 17:55:59,895-__main__-INFO-link_start...
+2022-08-01 17:56:00,070-__main__-INFO-CUDA available: True
+2022-08-01 17:56:00,073-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-08-01 17:56:03,372-tools.init_tool-INFO-Begin to initialize model...
+2022-08-01 17:56:08,526-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-08-01 17:56:08,526-tools.init_tool-INFO-Initialize done.
+2022-08-01 17:56:08,527-__main__-INFO-the size of train_dataset: 331
+2022-08-01 17:56:10,433-__main__-INFO-an example of train_datatset:
+2022-08-01 17:56:10,433-__main__-INFO-{'tokens': tensor([[  101,   100,  6158,  ...,     0,     0,     0],
+        [  101,   100,  6158,  ...,     0,     0,     0],
+        [  101, 16965,  3556,  ...,     0,     0,     0],
+        ...,
+        [  101,   100,  6158,  ...,     0,     0,     0],
+        [  101, 16965,  3556,  ..., 19048,  9678,  2091],
+        [  101,   100,  6158,  ...,     0,     0,     0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-08-01 17:56:10,826-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-08-01 17:56:10,831-tools.train_tool-INFO-Training start....
+2022-08-01 18:01:44,289-tools.eval_tool-INFO-0      train  331/331     5:31/ 0:00    2247.532{'acc': 0.0045, 'precision': 0.0063, 'recall': 0.0045, 'f1': 0.0037}
+2022-08-01 18:02:24,915-tools.eval_tool-INFO-0      valid  76/76       0:40/ 0:00    2026.205{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 18:08:00,873-tools.eval_tool-INFO-1      train  331/331     5:33/ 0:00    2042.119{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 18:08:40,002-tools.eval_tool-INFO-1      valid  76/76       0:39/ 0:00    2025.576{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 18:14:14,715-tools.eval_tool-INFO-2      train  331/331     5:32/ 0:00    2031.766{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 18:14:54,207-tools.eval_tool-INFO-2      valid  76/76       0:39/ 0:00    2022.373{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 18:16:59,283-__main__-INFO-link_start...
+2022-08-01 18:16:59,333-__main__-INFO-CUDA available: True
+2022-08-01 18:16:59,336-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-08-01 18:17:40,956-tools.init_tool-INFO-Begin to initialize model...
+2022-08-01 18:17:48,948-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-08-01 18:17:48,948-tools.init_tool-INFO-Initialize done.
+2022-08-01 18:17:48,948-__main__-INFO-the size of train_dataset: 331
+2022-08-01 18:17:50,940-__main__-INFO-an example of train_datatset:
+2022-08-01 18:17:50,941-__main__-INFO-{'tokens': tensor([[ 101, 8170, 2399,  ...,    0,    0,    0],
+        [ 101, 8112, 2399,  ...,    0,    0,    0],
+        [ 101, 1419, 2255,  ..., 8875, 1039,  129],
+        ...,
+        [ 101,  122,  510,  ...,    0,    0,    0],
+        [ 101, 8127, 2399,  ...,    0,    0,    0],
+        [ 101, 8127, 2399,  ...,    0,    0,    0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        ...,
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,   0,   0,   0],
+        ...,
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-08-01 18:17:51,425-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-08-01 18:17:51,428-tools.train_tool-INFO-Training start....
+2022-08-01 18:23:27,256-tools.eval_tool-INFO-0      train  331/331     5:33/ 0:00    1173.462{'acc': 0.1999, 'precision': 0.5136, 'recall': 0.1999, 'f1': 0.2697}
+2022-08-01 18:24:06,484-tools.eval_tool-INFO-0      valid  76/76       0:39/ 0:00    393.046 {'acc': 0.7071, 'precision': 0.7071, 'recall': 0.7071, 'f1': 0.7071}
+2022-08-01 18:26:27,165-__main__-INFO-link_start...
+2022-08-01 18:26:27,204-__main__-INFO-CUDA available: True
+2022-08-01 18:27:41,183-__main__-INFO-link_start...
+2022-08-01 18:27:41,426-__main__-INFO-CUDA available: True
+2022-08-01 18:27:41,429-tools.init_tool-INFO-Begin to initialize dataset and formatter...
+2022-08-01 18:27:44,815-tools.init_tool-INFO-Begin to initialize model...
+2022-08-01 18:27:50,323-tools.init_tool-WARNING-Cannot load checkpoint file with error 'NoneType' object has no attribute 'seek'. You can only torch.load from a file that is seekable. Please pre-load the data into a buffer like io.BytesIO and try to load from it instead.
+2022-08-01 18:27:50,323-tools.init_tool-INFO-Initialize done.
+2022-08-01 18:27:50,323-__main__-INFO-the size of train_dataset: 331
+2022-08-01 18:27:52,339-__main__-INFO-an example of train_datatset:
+2022-08-01 18:27:52,339-__main__-INFO-{'tokens': tensor([[  101,   100,  6158,  ...,   100,  8354,   100],
+        [  101,   100,  6158,  ...,     0,     0,     0],
+        [  101, 16965,  3556,  ...,  6317, 12697,  2822],
+        ...,
+        [  101,   100,  6158,  ...,   124,  8354,   121],
+        [  101,  2004,  2977,  ..., 20429, 14999, 10761],
+        [  101,   100,  6158,  ...,     0,     0,     0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        ...,
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0]]), 'labels': tensor([[  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218],
+        [  0,   0,   0,  ...,   0,   0,   0],
+        ...,
+        [  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ...,   0,   0,   0],
+        [  0,   0,   0,  ..., 218, 218, 218]])}
+2022-08-01 18:27:52,745-tools.train_tool-WARNING-Output path exists, check whether need to change a name of model
+2022-08-01 18:27:52,748-tools.train_tool-INFO-Training start....
+2022-08-01 18:33:27,261-tools.eval_tool-INFO-0      train  331/331     5:32/ 0:00    2253.742{'acc': 0.0045, 'precision': 0.0044, 'recall': 0.0045, 'f1': 0.0037}
+2022-08-01 18:34:06,735-tools.eval_tool-INFO-0      valid  76/76       0:39/ 0:00    2008.786{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 18:39:50,184-tools.eval_tool-INFO-1      train  331/331     5:41/ 0:00    1460.465{'acc': 0.0396, 'precision': 0.2638, 'recall': 0.0396, 'f1': 0.0583}
+2022-08-01 18:40:29,046-tools.eval_tool-INFO-1      valid  76/76       0:38/ 0:00    730.434 {'acc': 0.6912, 'precision': 0.6912, 'recall': 0.6912, 'f1': 0.6912}
+2022-08-01 18:46:03,945-tools.eval_tool-INFO-2      train  331/331     5:32/ 0:00    1609.637{'acc': 0.0723, 'precision': 0.3135, 'recall': 0.0723, 'f1': 0.1021}
+2022-08-01 18:46:43,603-tools.eval_tool-INFO-2      valid  76/76       0:39/ 0:00    778.922 {'acc': 0.6883, 'precision': 0.6883, 'recall': 0.6883, 'f1': 0.6883}
+2022-08-01 18:52:18,327-tools.eval_tool-INFO-3      train  331/331     5:32/ 0:00    720.627 {'acc': 0.2548, 'precision': 0.4503, 'recall': 0.2548, 'f1': 0.2747}
+2022-08-01 18:52:58,462-tools.eval_tool-INFO-3      valid  76/76       0:40/ 0:00    570.298 {'acc': 0.6953, 'precision': 0.6953, 'recall': 0.6953, 'f1': 0.6953}
+2022-08-01 18:58:42,678-tools.eval_tool-INFO-4      train  331/331     5:41/ 0:00    558.173 {'acc': 0.3561, 'precision': 0.5219, 'recall': 0.3561, 'f1': 0.3845}
+2022-08-01 18:59:21,850-tools.eval_tool-INFO-4      valid  76/76       0:39/ 0:00    464.918 {'acc': 0.6997, 'precision': 0.6997, 'recall': 0.6997, 'f1': 0.6997}
+2022-08-01 19:05:00,712-tools.eval_tool-INFO-5      train  331/331     5:36/ 0:00    463.898 {'acc': 0.4312, 'precision': 0.5863, 'recall': 0.4312, 'f1': 0.4599}
+2022-08-01 19:05:40,238-tools.eval_tool-INFO-5      valid  76/76       0:39/ 0:00    412.289 {'acc': 0.7019, 'precision': 0.7019, 'recall': 0.7019, 'f1': 0.7019}
+2022-08-01 19:11:11,384-tools.eval_tool-INFO-6      train  331/331     5:28/ 0:00    1569.038{'acc': 0.2125, 'precision': 0.6074, 'recall': 0.2125, 'f1': 0.3}
+2022-08-01 19:11:50,841-tools.eval_tool-INFO-6      valid  76/76       0:39/ 0:00    1728.891{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 19:17:23,302-tools.eval_tool-INFO-7      train  331/331     5:30/ 0:00    909.929 {'acc': 0.2532, 'precision': 0.5345, 'recall': 0.2532, 'f1': 0.3106}
+2022-08-01 19:18:02,546-tools.eval_tool-INFO-7      valid  76/76       0:39/ 0:00    581.240 {'acc': 0.6972, 'precision': 0.6972, 'recall': 0.6972, 'f1': 0.6972}
+2022-08-01 19:23:38,319-tools.eval_tool-INFO-8      train  331/331     5:33/ 0:00    1157.506{'acc': 0.2959, 'precision': 0.5897, 'recall': 0.2959, 'f1': 0.3622}
+2022-08-01 19:24:17,963-tools.eval_tool-INFO-8      valid  76/76       0:39/ 0:00    2062.651{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 19:29:55,802-tools.eval_tool-INFO-9      train  331/331     5:36/ 0:00    2837.918{'acc': 0.0045, 'precision': 0.0043, 'recall': 0.0045, 'f1': 0.0037}
+2022-08-01 19:30:33,947-tools.eval_tool-INFO-9      valid  76/76       0:38/ 0:00    2034.350{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 19:36:09,567-tools.eval_tool-INFO-10     train  331/331     5:33/ 0:00    2020.214{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 19:36:47,878-tools.eval_tool-INFO-10     valid  76/76       0:38/ 0:00    2014.161{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 19:42:22,354-tools.eval_tool-INFO-11     train  331/331     5:32/ 0:00    2007.043{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 19:43:00,788-tools.eval_tool-INFO-11     valid  76/76       0:38/ 0:00    2010.343{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 19:48:31,357-tools.eval_tool-INFO-12     train  331/331     5:28/ 0:00    1999.866{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 19:49:10,379-tools.eval_tool-INFO-12     valid  76/76       0:39/ 0:00    2001.380{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 19:54:45,466-tools.eval_tool-INFO-13     train  331/331     5:33/ 0:00    2023.368{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 19:55:23,882-tools.eval_tool-INFO-13     valid  76/76       0:38/ 0:00    1998.022{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 20:01:07,033-tools.eval_tool-INFO-14     train  331/331     5:41/ 0:00    1998.584{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 20:01:46,953-tools.eval_tool-INFO-14     valid  76/76       0:39/ 0:00    1986.181{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 20:07:39,347-tools.eval_tool-INFO-15     train  331/331     5:50/ 0:00    2453.387{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 20:08:21,244-tools.eval_tool-INFO-15     valid  76/76       0:41/ 0:00    2838.828{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 20:14:09,991-tools.eval_tool-INFO-16     train  331/331     5:47/ 0:00    2313.843{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 20:14:50,082-tools.eval_tool-INFO-16     valid  76/76       0:40/ 0:00    2000.966{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 20:20:30,132-tools.eval_tool-INFO-17     train  331/331     5:38/ 0:00    2275.411{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 20:21:11,349-tools.eval_tool-INFO-17     valid  76/76       0:41/ 0:00    2102.053{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 20:26:53,985-tools.eval_tool-INFO-18     train  331/331     5:40/ 0:00    3973.491{'acc': 0.0044, 'precision': 0.0031, 'recall': 0.0044, 'f1': 0.0036}
+2022-08-01 20:27:33,622-tools.eval_tool-INFO-18     valid  76/76       0:39/ 0:00    43137.971{'acc': 0.0, 'precision': 0.0, 'recall': 0.0, 'f1': 0.0}
+2022-08-01 20:33:26,627-tools.eval_tool-INFO-19     train  331/331     5:51/ 0:00    6953.376{'acc': 0.0045, 'precision': 0.0032, 'recall': 0.0045, 'f1': 0.0035}
+2022-08-01 20:34:06,318-tools.eval_tool-INFO-19     valid  76/76       0:39/ 0:00    2023.054{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 20:39:51,984-tools.eval_tool-INFO-20     train  331/331     5:43/ 0:00    2008.410{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 20:40:31,931-tools.eval_tool-INFO-20     valid  76/76       0:39/ 0:00    1997.823{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 20:46:11,002-tools.eval_tool-INFO-21     train  331/331     5:37/ 0:00    1995.731{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 20:46:50,851-tools.eval_tool-INFO-21     valid  76/76       0:39/ 0:00    2016.662{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 20:52:33,395-tools.eval_tool-INFO-22     train  331/331     5:40/ 0:00    1984.777{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 20:53:13,821-tools.eval_tool-INFO-22     valid  76/76       0:40/ 0:00    1981.408{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 20:58:54,586-tools.eval_tool-INFO-23     train  331/331     5:39/ 0:00    10853.993{'acc': 0.0044, 'precision': 0.0045, 'recall': 0.0044, 'f1': 0.0036}
+2022-08-01 20:59:33,874-tools.eval_tool-INFO-23     valid  76/76       0:39/ 0:00    2119.428{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 21:05:15,534-tools.eval_tool-INFO-24     train  331/331     5:40/ 0:00    2035.838{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 21:05:56,552-tools.eval_tool-INFO-24     valid  76/76       0:41/ 0:00    2053.883{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 21:11:38,035-tools.eval_tool-INFO-25     train  331/331     5:39/ 0:00    2002.438{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 21:12:17,877-tools.eval_tool-INFO-25     valid  76/76       0:39/ 0:00    2018.524{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 21:17:58,692-tools.eval_tool-INFO-26     train  331/331     5:39/ 0:00    1981.634{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 21:18:38,254-tools.eval_tool-INFO-26     valid  76/76       0:39/ 0:00    1993.318{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 21:24:21,677-tools.eval_tool-INFO-27     train  331/331     5:41/ 0:00    1966.508{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 21:25:01,286-tools.eval_tool-INFO-27     valid  76/76       0:39/ 0:00    1973.983{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 21:30:47,423-tools.eval_tool-INFO-28     train  331/331     5:44/ 0:00    1954.843{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 21:31:27,303-tools.eval_tool-INFO-28     valid  76/76       0:39/ 0:00    1958.298{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 21:37:11,907-tools.eval_tool-INFO-29     train  331/331     5:42/ 0:00    2221.829{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 21:37:51,124-tools.eval_tool-INFO-29     valid  76/76       0:39/ 0:00    2080.960{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 21:43:35,054-tools.eval_tool-INFO-30     train  331/331     5:42/ 0:00    2172.585{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 21:44:15,093-tools.eval_tool-INFO-30     valid  76/76       0:40/ 0:00    2410.375{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 21:49:56,030-tools.eval_tool-INFO-31     train  331/331     5:39/ 0:00    2251.226{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 21:50:33,427-tools.eval_tool-INFO-31     valid  76/76       0:37/ 0:00    2400.470{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 21:55:55,871-tools.eval_tool-INFO-32     train  331/331     5:20/ 0:00    2248.698{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 21:56:33,951-tools.eval_tool-INFO-32     valid  76/76       0:38/ 0:00    2301.335{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 22:02:03,313-tools.eval_tool-INFO-33     train  331/331     5:27/ 0:00    2203.504{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 22:02:42,486-tools.eval_tool-INFO-33     valid  76/76       0:39/ 0:00    2251.019{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 22:08:15,600-tools.eval_tool-INFO-34     train  331/331     5:31/ 0:00    2049.598{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 22:08:53,356-tools.eval_tool-INFO-34     valid  76/76       0:37/ 0:00    1941.085{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 22:14:17,047-tools.eval_tool-INFO-35     train  331/331     5:22/ 0:00    1963.151{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 22:14:55,746-tools.eval_tool-INFO-35     valid  76/76       0:38/ 0:00    1933.327{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 22:20:24,095-tools.eval_tool-INFO-36     train  331/331     5:26/ 0:00    2070.705{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 22:21:02,245-tools.eval_tool-INFO-36     valid  76/76       0:38/ 0:00    1940.639{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 22:26:31,921-tools.eval_tool-INFO-37     train  331/331     5:28/ 0:00    2393.007{'acc': 0.0046, 'precision': 0.0043, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 22:27:09,917-tools.eval_tool-INFO-37     valid  76/76       0:37/ 0:00    1941.747{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 22:32:37,582-tools.eval_tool-INFO-38     train  331/331     5:26/ 0:00    1967.680{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 22:33:15,440-tools.eval_tool-INFO-38     valid  76/76       0:37/ 0:00    1912.963{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 22:38:44,197-tools.eval_tool-INFO-39     train  331/331     5:27/ 0:00    1933.155{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 22:39:22,340-tools.eval_tool-INFO-39     valid  76/76       0:38/ 0:00    1906.581{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 22:44:50,577-tools.eval_tool-INFO-40     train  331/331     5:26/ 0:00    2368.704{'acc': 0.0046, 'precision': 0.0043, 'recall': 0.0046, 'f1': 0.0041}
+2022-08-01 22:45:28,473-tools.eval_tool-INFO-40     valid  76/76       0:37/ 0:00    2000.122{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 22:50:56,193-tools.eval_tool-INFO-41     train  331/331     5:25/ 0:00    2382.881{'acc': 0.0044, 'precision': 0.0043, 'recall': 0.0044, 'f1': 0.0044}
+2022-08-01 22:51:34,209-tools.eval_tool-INFO-41     valid  76/76       0:38/ 0:00    2025.502{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 22:57:01,802-tools.eval_tool-INFO-42     train  331/331     5:26/ 0:00    1987.730{'acc': 0.0046, 'precision': 0.0043, 'recall': 0.0046, 'f1': 0.0042}
+2022-08-01 22:57:40,028-tools.eval_tool-INFO-42     valid  76/76       0:38/ 0:00    1898.425{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 23:03:09,934-tools.eval_tool-INFO-43     train  331/331     5:28/ 0:00    1914.247{'acc': 0.0046, 'precision': 0.0043, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 23:03:48,354-tools.eval_tool-INFO-43     valid  76/76       0:38/ 0:00    1892.821{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 23:09:16,111-tools.eval_tool-INFO-44     train  331/331     5:26/ 0:00    2062.821{'acc': 0.0046, 'precision': 0.0043, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 23:09:55,177-tools.eval_tool-INFO-44     valid  76/76       0:39/ 0:00    2604.330{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 23:15:21,008-tools.eval_tool-INFO-45     train  331/331     5:24/ 0:00    2478.499{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 23:15:59,050-tools.eval_tool-INFO-45     valid  76/76       0:38/ 0:00    2742.690{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 23:21:27,149-tools.eval_tool-INFO-46     train  331/331     5:26/ 0:00    2567.368{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 23:22:05,475-tools.eval_tool-INFO-46     valid  76/76       0:38/ 0:00    2617.463{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 23:27:31,608-tools.eval_tool-INFO-47     train  331/331     5:24/ 0:00    2458.123{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 23:28:09,631-tools.eval_tool-INFO-47     valid  76/76       0:38/ 0:00    2499.115{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 23:33:33,242-tools.eval_tool-INFO-48     train  331/331     5:22/ 0:00    2443.796{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 23:34:12,233-tools.eval_tool-INFO-48     valid  76/76       0:38/ 0:00    2523.488{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 23:39:36,743-tools.eval_tool-INFO-49     train  331/331     5:22/ 0:00    2370.582{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 23:40:14,735-tools.eval_tool-INFO-49     valid  76/76       0:37/ 0:00    2389.146{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 23:45:44,582-tools.eval_tool-INFO-50     train  331/331     5:28/ 0:00    2275.397{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 23:46:23,939-tools.eval_tool-INFO-50     valid  76/76       0:39/ 0:00    2703.302{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 23:51:54,041-tools.eval_tool-INFO-51     train  331/331     5:28/ 0:00    2525.132{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 23:52:31,790-tools.eval_tool-INFO-51     valid  76/76       0:37/ 0:00    2576.635{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-01 23:57:59,703-tools.eval_tool-INFO-52     train  331/331     5:26/ 0:00    2441.837{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-01 23:58:38,610-tools.eval_tool-INFO-52     valid  76/76       0:38/ 0:00    2496.820{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-02 00:04:04,212-tools.eval_tool-INFO-53     train  331/331     5:23/ 0:00    2364.433{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-02 00:04:42,211-tools.eval_tool-INFO-53     valid  76/76       0:37/ 0:00    2413.926{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-02 00:10:06,213-tools.eval_tool-INFO-54     train  331/331     5:22/ 0:00    2304.616{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-02 00:10:43,891-tools.eval_tool-INFO-54     valid  76/76       0:37/ 0:00    2387.428{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-02 00:16:03,783-tools.eval_tool-INFO-55     train  331/331     5:18/ 0:00    2298.365{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-02 00:16:40,438-tools.eval_tool-INFO-55     valid  76/76       0:36/ 0:00    2348.835{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-02 00:21:54,348-tools.eval_tool-INFO-56     train  331/331     5:12/ 0:00    2264.392{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-02 00:22:31,008-tools.eval_tool-INFO-56     valid  76/76       0:36/ 0:00    2274.345{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-02 00:27:45,667-tools.eval_tool-INFO-57     train  331/331     5:13/ 0:00    2188.172{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-02 00:28:24,376-tools.eval_tool-INFO-57     valid  76/76       0:38/ 0:00    2226.965{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-02 00:33:39,959-tools.eval_tool-INFO-58     train  331/331     5:13/ 0:00    2120.163{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-02 00:34:17,842-tools.eval_tool-INFO-58     valid  76/76       0:37/ 0:00    2118.280{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-02 00:39:33,875-tools.eval_tool-INFO-59     train  331/331     5:14/ 0:00    2066.843{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-02 00:40:13,259-tools.eval_tool-INFO-59     valid  76/76       0:39/ 0:00    2092.891{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-02 00:45:29,154-tools.eval_tool-INFO-60     train  331/331     5:14/ 0:00    2042.942{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-02 00:46:06,296-tools.eval_tool-INFO-60     valid  76/76       0:37/ 0:00    2064.971{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-02 00:51:18,411-tools.eval_tool-INFO-61     train  331/331     5:10/ 0:00    2016.696{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-02 00:51:55,811-tools.eval_tool-INFO-61     valid  76/76       0:37/ 0:00    2036.477{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-02 00:57:09,991-tools.eval_tool-INFO-62     train  331/331     5:12/ 0:00    1989.855{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-02 00:57:46,872-tools.eval_tool-INFO-62     valid  76/76       0:36/ 0:00    1915.396{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-02 01:03:01,337-tools.eval_tool-INFO-63     train  331/331     5:13/ 0:00    2019.564{'acc': 0.0046, 'precision': 0.0031, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-02 01:03:38,906-tools.eval_tool-INFO-63     valid  76/76       0:37/ 0:00    1875.762{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-02 01:08:58,303-tools.eval_tool-INFO-64     train  331/331     5:17/ 0:00    2128.191{'acc': 0.0046, 'precision': 0.0044, 'recall': 0.0046, 'f1': 0.0038}
+2022-08-02 01:09:36,795-tools.eval_tool-INFO-64     valid  76/76       0:38/ 0:00    2016.600{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-02 01:15:17,603-tools.eval_tool-INFO-65     train  331/331     5:39/ 0:00    1958.995{'acc': 0.0046, 'precision': 0.0044, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-02 01:15:58,276-tools.eval_tool-INFO-65     valid  76/76       0:40/ 0:00    1840.537{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
+2022-08-02 01:21:41,203-tools.eval_tool-INFO-66     train  331/331     5:41/ 0:00    1873.915{'acc': 0.0046, 'precision': 0.0043, 'recall': 0.0046, 'f1': 0.0037}
+2022-08-02 01:22:20,772-tools.eval_tool-INFO-66     valid  76/76       0:39/ 0:00    1841.852{'acc': 0.6654, 'precision': 0.6654, 'recall': 0.6654, 'f1': 0.6654}
