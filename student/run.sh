@@ -1,0 +1,1 @@
+python train.py --config config/default.config --gpu 0,1 

@@ -16,18 +16,33 @@ class BertSentFormatter(BasicFormatter):
         # self.tokenizer = AutoTokenizer.from_pretrained("hfl/chinese-roberta-wwm-ext")
         self.tokenizer = AutoTokenizer.from_pretrained("bert-base-chinese")
         self.max_len = config.getint("data", "max_seq_length")
+        self.max_sent_num = config.getint("data", "max_sent_num")
         self.mode = mode
 
     def convert_tokens_to_ids(self, text, max_len):
         input_ids = []
         token_type_ids = []
         attention_mask = []
-        text = re.split(r'[。,s]s*',text)
+        text = re.split(r'[；;。sA]s*',text)
         for sent in text:
-            token = self.tokenizer(sent, padding = 'max_length', max_length = max_len)
+            token = self.tokenizer(sent, padding = 'max_length', truncation = 'longest_first', max_length = max_len)
             input_ids.append(token.input_ids)
             token_type_ids.append(token.token_type_ids)
             attention_mask.append(token.attention_mask)
+        
+        while len(input_ids) < self.max_sent_num:
+            temp = self.tokenizer('', padding = 'max_length', max_length = max_len)
+            input_ids.append(temp.input_ids)
+            token_type_ids.append(temp.token_type_ids)
+            attention_mask.append(temp.attention_mask)
+        
+        if len(input_ids) > self.max_sent_num:
+            input_ids = input_ids[0:self.max_sent_num]
+            token_type_ids = token_type_ids[0:self.max_sent_num]
+            attention_mask = attention_mask[0:self.max_sent_num]
+
+
+        
         return input_ids, token_type_ids, attention_mask
 
     # 传入的是一个batch
@@ -51,16 +66,16 @@ class BertSentFormatter(BasicFormatter):
                 label_json_item = temp['label']
 
             # 处理query
-            query_token = self.convert_tokens_to_ids(query_json_item['q'], 128)
-            query_input_ids.append(query_token.input_ids) #[batch, sent, max_len]
-            query_token_type_ids.append(query_token.token_type_ids)
-            query_attention_mask.append(query_token.attention_mask)
+            query_token = self.convert_tokens_to_ids(query_json_item['q'], self.max_len) #[sent, max_len]
+            query_input_ids.append(query_token[0])
+            query_token_type_ids.append(query_token[1])
+            query_attention_mask.append(query_token[2])
 
             #处理candidate
-            candidate_token = self.convert_tokens_to_ids(candidate_json_item['ajjbqk'], 128)
-            candidate_input_ids.append(candidate_token.input_ids)
-            candidate_token_type_ids.append(candidate_token.token_type_ids)
-            candidate_attention_mask.append(candidate_token.attention_mask)
+            candidate_token = self.convert_tokens_to_ids(candidate_json_item['ajjbqk'], self.max_len)
+            candidate_input_ids.append(candidate_token[0])
+            candidate_token_type_ids.append(candidate_token[1])
+            candidate_attention_mask.append(candidate_token[2])
 
             #处理label
             if(mode != 'test'):

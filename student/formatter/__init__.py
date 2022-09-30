@@ -24,5 +24,5 @@ def init_formatter(config, mode, *args, **params):
 
         return formatter
     else:
-        logger.error("There is no formatter called %s, check your config." % which)
+        logger.get_log().error("There is no formatter called %s, check your config." % which)
         raise NotImplementedError
