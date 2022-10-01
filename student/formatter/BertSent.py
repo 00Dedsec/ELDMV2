@@ -7,7 +7,6 @@ from transformers import AutoTokenizer
 
 from formatter.Basic import BasicFormatter
 
-
 class BertSentFormatter(BasicFormatter):
     def __init__(self, config, mode, *args, **params):
         super().__init__(config, mode, *args, **params)
