@@ -26,7 +26,7 @@ def init_all(config, gpu_list, checkpoint ,mode, *args, **params):
     global_step = 0
 
     if len(gpu_list) > 0:
-        model = model.cuda()
+        model = model.to('cuda')
 
         try:
             model.init_multi_gpu(gpu_list, config, *args, **params)

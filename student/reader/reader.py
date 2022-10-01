@@ -78,7 +78,7 @@ def init_one_dataset(config, mode, *args, **params):
                                 num_workers=reader_num,
                                 collate_fn=collate_fn[mode],
                                 sampler = sampler,
-                                pin_memory=True,
+                                pin_memory=False,
                                 drop_last=drop_last)
         return dataloader
     else:

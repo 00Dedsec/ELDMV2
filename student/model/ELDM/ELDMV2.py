@@ -17,7 +17,7 @@ class ELDMMoudle(nn.Module):
         self.CNN = CNNMoudle(config, gpu_list, *args, **params)
         self.sep = '[SEP]'
 
-    def forward(self, data, config, gpu_list, mode, *args, **params):
+    def forward(self, data, *args, **params):
         print("?")
         exit()
         """
@@ -84,7 +84,7 @@ class ELDMV2(nn.Module):
     def init_multi_gpu(self, device, config,  *args, **params):
         self.ELDMMoule = nn.DataParallel(self.ELDMMoule, device_ids=device)
 
-    def forward(self, data, config, gpu_listm, mode, *args, **params):
+    def forward(self, data, config, gpu_list, mode, *args, **params):
         re = self.ELDMMoule(data)
         if mode == 'train' or mode == 'valid':
             label = data['label']
