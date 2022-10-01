@@ -18,6 +18,8 @@ class ELDMMoudle(nn.Module):
         self.sep = '[SEP]'
 
     def forward(self, data, config, gpu_list, mode, *args, **params):
+        print("?")
+        exit()
         """
         data  = {
             "query_input_ids": query_input_ids, # [batch_size, sent1, max_len]
