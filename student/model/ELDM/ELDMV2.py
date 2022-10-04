@@ -88,7 +88,7 @@ class ELDMV2(nn.Module):
         re = self.ELDMMoule(data)
         if mode == 'train' or mode == 'valid':
             label = data['label']
-            loss = self.loss(re, data)
+            loss = self.loss(re, label)
             return re, loss
         else:
             return re

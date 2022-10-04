@@ -1,7 +1,9 @@
 from model.ELDM.ELDMV2 import ELDMV2
+from model.SMASHRNN.smashRNN import SMASHRNN
 
 model_list = {
-    "ELDMV2": ELDMV2
+    "ELDMV2": ELDMV2,
+    "SMASHRNN": SMASHRNN
 }
 
 

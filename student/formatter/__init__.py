@@ -1,10 +1,12 @@
 from utils.logger import Logger
 from formatter.BertSent import BertSentFormatter
+from formatter.Word import WordFormatter
 
 logger = Logger(__name__)
 
 formatter_list = {
-    "BertSentFormatter": BertSentFormatter
+    "BertSentFormatter": BertSentFormatter,
+    "WordFormatter": WordFormatter
 }
 
 
