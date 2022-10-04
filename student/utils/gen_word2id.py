@@ -5,7 +5,7 @@ min_freq = 20
 
 keep = set()
 
-input_path = "./data/CAIL2019-SCM/cutted/frequency.txt"
+input_path = "..\data\LECARD\_frequency.txt"
 
 if __name__ == "__main__":
     data = json.load(open(input_path, "r"))
@@ -22,6 +22,6 @@ if __name__ == "__main__":
         word2id[word_list[a]] = a
     print(len(word2id))
 
-    json.dump(word2id, open("./data/CAIL2019-SCM/cutted/word2id.txt", "w", encoding="utf8"),
+    json.dump(word2id, open("..\data\LECARD\_frequency.txt", "w", encoding="utf8"),
               ensure_ascii=False,
               indent=2)

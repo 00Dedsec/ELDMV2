@@ -2,3 +2,4 @@
 *.pkl
 a.py
 test.py
+.json
