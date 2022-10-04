@@ -59,6 +59,6 @@ if __name__ == "__main__":
             print(json.dumps(x, ensure_ascii=False, sort_keys=True), file=f)
         f.close
 
-    # json.dump(frequency, open("..\data\LECARD\_frequency.txt", "w", encoding="utf8"),
-    #           indent=2,
-    #           ensure_ascii=False)
+    json.dump(frequency, open("..\data\LECARD\_frequency.txt", "w", encoding="utf8"),
+              indent=2,
+              ensure_ascii=False)
