@@ -4,3 +4,4 @@ a.py
 test.py
 *.json
 *.txt
+*.pyc
