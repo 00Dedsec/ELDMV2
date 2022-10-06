@@ -1,3 +1,4 @@
+import encodings
 import os
 import json
 import jieba
@@ -25,7 +26,7 @@ def cut(s, stopwords):
 if __name__ == "__main__":
     print('begin...')
     result = {}
-    with open( 'stopword.txt', 'r') as g:
+    with open( 'stopword.txt', 'r', encoding="utf8") as g:
         words = g.readlines()
     stopwords = [i.strip() for i in words]
     stopwords.extend(['.','（','）','-'])
@@ -37,8 +38,8 @@ if __name__ == "__main__":
     for dir in dir_list:
         os.makedirs(os.path.join(output_path, dir), exist_ok=True)
         f = open(os.path.join(input_path, dir, 'query.json'), "r", encoding='utf8')
+        data = []
         for line in f:
-            data = []
             x = json.loads(line)
             x['q'] = cut(x['q'], stopwords)
             ridx = x['ridx']
