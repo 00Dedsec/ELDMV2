@@ -7,7 +7,7 @@ import random
 """
 {
     query: query
-    candidates: {
+    candidate: {
         原始candidate + candidate_id
     }
     label: 3~0 最相关~不相关 

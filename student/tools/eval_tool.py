@@ -103,6 +103,7 @@ def metrics(prediction, config):
         target = []
         indexes = []
         count = count+1
+        item_prediction = str(item_prediction)
         temp = list(map(lambda a: label[item_prediction][str(a)] if str(a) in label[item_prediction].keys() else 0, prediction[item_prediction]))
         preds.extend(temp[0:30])
         target.extend(sorted(label[item_prediction].values(), reverse=True)[0:30])
@@ -137,12 +138,12 @@ def metrics(prediction, config):
     ndcg_20 = sndcg_20/len(prediction.keys())
     ndcg_30 = sndcg_30/len(prediction.keys())
     return {
-        'precision_5': precision_5,
-        'precision_10': precision_10,
-        'map': smap,
-        'ndcg_10': ndcg_10,
-        'ndcg_20': ndcg_20,
-        'ndcg_30': ndcg_30
+        'precision_5': round(precision_5, 4),
+        'precision_10': round(precision_10, 4),
+        'map': round(smap, 4) ,
+        'ndcg_10': round(ndcg_10, 4),
+        'ndcg_20': round(ndcg_20, 4),
+        'ndcg_30': round(ndcg_30, 4)
     }
 
 
@@ -156,7 +157,7 @@ def valid(model, dataset, epoch, writer, config, gpu_list, output_function, mode
     output_info = ""
     output_time = config.getint("output", "output_time")
     step = -1
-
+    result_rank_dict = {}
     with torch.no_grad():
         for step, data in enumerate(dataset):
             for key in data.keys():
@@ -196,50 +197,49 @@ def valid(model, dataset, epoch, writer, config, gpu_list, output_function, mode
             #      ...
             #   }
             # }
-            result_rank_dict = {}
             for rank, item, label in zip(results, data['query_candidate_id'], data['label']):
                 if item[0] not in result_rank_dict.keys():
                     result_rank_dict[item[0]] = {}
                 result_rank_dict[item[0]][item[1]] = [rank,label]
-
-            # result_rank_dict = {
-            #   1(ridx): {
-            #       (11(candidate_id), [rank, label] )
-            #       (22(candidate_id), [rank, label] )
-            #   },
-            #  2(ridx): {
-            #      ...
-            #   }
-            # }
-            for item in result_rank_dict.keys():
-                result_rank_dict[item] = sorted(result_rank_dict[item].items(), key = lambda candidate: candidate[1][0], reverse=True)
-
-            upload_dict = {}
-            for query_id in result_rank_dict.keys():
-                if query_id not in upload_dict.keys():
-                    upload_dict[query_id] = []
-                for rank in result_rank_dict[query_id]:
-                    upload_dict[query_id].append(int(rank[0]))
-
-            result = metrics(upload_dict, config)
                 
             if step % output_time == 0:
                 delta_t = timer() - start_time
                 output_value(epoch, mode, "%d/%d" % (step + 1, total_len), "%s/%s" % (
                     gen_time_str(delta_t), gen_time_str(delta_t * (total_len - step - 1) / (step + 1))),
-                                "%.3lf" % (total_loss / (step + 1)), result, '\r', config)
+                                "%.3lf" % (total_loss / (step + 1)), 'info', '\r', config)
+    
+    # result_rank_dict = {
+    #   1(ridx): {
+    #       (11(candidate_id), [rank, label] )
+    #       (22(candidate_id), [rank, label] )
+    #   },
+    #  2(ridx): {
+    #      ...
+    #   }
+    # }
+
+    for item in result_rank_dict.keys():
+        result_rank_dict[item] = sorted(result_rank_dict[item].items(), key = lambda candidate: candidate[1][0], reverse=True)
+
+    upload_dict = {}
+    for query_id in result_rank_dict.keys():
+        if query_id not in upload_dict.keys():
+            upload_dict[str(query_id)] = []
+        for rank in result_rank_dict[query_id]:
+            upload_dict[str(query_id)].append(int(rank[0]))
+    merics_result = metrics(upload_dict, config)
 
 
     delta_t = timer() - start_time
     output_value(epoch, mode, "%d/%d" % (step + 1, total_len), "%s/%s" % (
         gen_time_str(delta_t), gen_time_str(delta_t * (total_len - step - 1) / (step + 1))),
-                 "%.3lf" % (total_loss / (step + 1)), result, '\r', config)
+                 "%.3lf" % (total_loss / (step + 1)), merics_result, '\r', config)
 
     
 
     output_value_log(epoch, mode, "%d/%d" % (step + 1, total_len), "%s/%s" % (
         gen_time_str(delta_t), gen_time_str(delta_t * (total_len - step - 1) / (step + 1))),
-                 "%.3lf" % (total_loss / (step + 1)), result, '\r', config)
+                 "%.3lf" % (total_loss / (step + 1)), merics_result, '\r', config)
 
     del result_rank_dict
     

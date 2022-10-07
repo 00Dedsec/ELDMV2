@@ -8,7 +8,7 @@ keep = set()
 input_path = "..\data\LECARD\_frequency.txt"
 
 if __name__ == "__main__":
-    data = json.load(open(input_path, "r"))
+    data = json.load(open(input_path, "r", encoding="utf-8"))
     word_list = ["[UNK]", "[PAD]"]
     for word in data.keys():
         if data[word] > min_freq or word in keep:
@@ -22,6 +22,6 @@ if __name__ == "__main__":
         word2id[word_list[a]] = a
     print(len(word2id))
 
-    json.dump(word2id, open("..\data\LECARD\_frequency.txt", "w", encoding="utf8"),
+    json.dump(word2id, open("..\data\LECARD\word2id.txt", "w", encoding="utf8"),
               ensure_ascii=False,
               indent=2)

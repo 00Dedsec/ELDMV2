@@ -30,6 +30,8 @@ if __name__ == "__main__":
         words = g.readlines()
     stopwords = [i.strip() for i in words]
     stopwords.extend(['.','（','）','-'])
+    stopwords.remove("，")
+    stopwords.remove("。")
 
     input_path = path_list[0]
     output_path = path_list[1]

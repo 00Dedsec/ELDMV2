@@ -3,8 +3,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 import json
 
-from tools.accuracy_tool import single_label_top1_accuracy
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -96,26 +94,30 @@ class SMASHMoudle(nn.Module):
         super(SMASHMoudle, self).__init__()
 
         self.encoder = DEC(config, gpu_list, *args, **params)
-        self.fc = nn.Linear(config.getint("model", "hidden_size") * 4, 4)
-        self.embedding = nn.Embedding(len(json.load(open(config.get("data", "word2id")))),
+        self.fc = nn.Linear(config.getint("model", "hidden_size") * 2, 4)
+        self.embedding = nn.Embedding(len(json.load(open(config.get("data", "word2id"), encoding="utf8"))),
                                       config.getint("model", "hidden_size"))
 
     def forward(self, data):
         q = data['q']
         c = data['c']
-        q = self.embedding(q)
-        c = self.embedding(c)
-        q = self.encoder(q)
-        c = self.encoder(c)
+        text = torch.cat([q,c], dim=1)
+        # q = self.embedding(q)
+        # c = self.embedding(c)
+        # q = self.encoder(q)
+        # c = self.encoder(c)
+        x = self.embedding(text)
+        x = self.encoder(x)
 
-        s = self.fc(torch.cat([q, c], dim=1))
+
+        s = self.fc(x)
 
         return s
 
 class SMASHRNN(nn.Module):
     def __init__(self, config, gpu_list, *args, **params):
         super(SMASHRNN, self).__init__()
-        self.SMASHMoudle = SMASHMoudle(self, config, gpu_list, *args, **params)
+        self.SMASHMoudle = SMASHMoudle(config, gpu_list, *args, **params)
         self.loss = nn.CrossEntropyLoss()
 
     def init_multi_gpu(self, device, config, *args, **params):

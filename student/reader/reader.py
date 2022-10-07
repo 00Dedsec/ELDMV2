@@ -1,5 +1,7 @@
 import torch
 from torch.utils.data import DataLoader
+
+import formatter as form
 from utils.logger import Logger
 from dataset import dataset_list
 
