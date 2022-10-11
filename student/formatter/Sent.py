@@ -18,6 +18,7 @@ class SentFormatter(BasicFormatter):
         self.mode = mode
         self.unk = "<UNK>"
         self.pad = "<PAD>"
+        
 
     def convert_tokens_to_ids(self, text, type):
         arr = [[]]
