@@ -1,9 +1,11 @@
 from model.ELDM.ELDMV2 import ELDMV2
 from model.SMASHRNN.smashRNN import SMASHRNN
+from model.TextCNN.TexnCNN import TextCNN
 
 model_list = {
     "ELDMV2": ELDMV2,
-    "SMASHRNN": SMASHRNN
+    "SMASHRNN": SMASHRNN,
+    "TextCNN": TextCNN
 }
 
 

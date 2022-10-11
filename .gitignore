@@ -6,3 +6,6 @@ test.py
 *.txt
 *.pyc
 output
+*.npy
+*.bigram-char
+_pycache_

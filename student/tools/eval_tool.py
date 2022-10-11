@@ -182,7 +182,7 @@ def valid(model, dataset, epoch, writer, config, gpu_list, output_function, mode
                 #     return 1.0
                 # else:
                 #     return 0.0
-                return x[3]-x[2]-x[1]-x[0]
+                return 1.5*x[3]+x[2]+x[1]-x[0]
 
             results = map(f, logits)
 

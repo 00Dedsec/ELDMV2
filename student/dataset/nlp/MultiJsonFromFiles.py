@@ -2,8 +2,11 @@ import json
 import os
 from torch.utils.data import Dataset
 import random
+from copy import deepcopy
 
-
+from tqdm import tqdm
+from utils.logger import Logger
+from utils.augmentation import eda
 """
 {
     query: query
@@ -13,7 +16,7 @@ import random
     label: 3~0 最相关~不相关 
 }
 """
-
+logger = Logger(__name__)
 class MultiJsonFromFilesDataset(Dataset):
     def __init__(self, config, mode, encoding="utf8", *args, **params):
         self.config = config
@@ -46,6 +49,28 @@ class MultiJsonFromFilesDataset(Dataset):
                     data_item['label'] = query_label_json[data_item['candidate']['candidate_id']]
                 else:
                     data_item['label'] = 0
+            
+            # 数据增广
+            length = len(self.data)
+            logger.get_log().info("开始数据增广...")
+            logger.get_log().info('增广前：' + str(length))
+            with tqdm(total = length) as bar:
+                for i in range(0, length):
+                    if self.data[i]['label'] != 0:
+
+                        # q_aug = eda(self.data[i]['query']['q'])
+                        # c_aug = eda(self.data[i]['candidate']['ajjbqk'])
+                        # for i in range(0, len(q_aug)):
+                        #     data = deepcopy(self.data[i])
+                        #     data['query']['q'] = q_aug[i]
+                        #     data['candidate']['ajjbqk'] = c_aug[i]
+                        #     self.data.append(data)
+
+                        self.data.append(self.data[i])
+                    bar.update(1)
+                bar.close()
+            logger.get_log().info('增广后：' + str(len(self.data)))
+            
 
         elif mode == 'valid':
             f_query = open(self.config.get("data", "valid_query_data_path"), encoding='utf-8')

@@ -45,7 +45,7 @@ def test(parameters, config, gpu_list):
                 #     return 1.0
                 # else:
                 #     return 0.0
-                return x[3]-x[2]-x[1]-x[0]
+                return x[1]
             results = map(f, logits)
 
             cnt += 1

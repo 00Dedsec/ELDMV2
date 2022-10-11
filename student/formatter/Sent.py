@@ -1,9 +1,11 @@
 import json
+from lib2to3.pgen2 import token
 import torch
 import os
 import numpy as np
 
 from formatter.Basic import BasicFormatter
+import random
 
 
 class SentFormatter(BasicFormatter):
@@ -11,28 +13,49 @@ class SentFormatter(BasicFormatter):
         super().__init__(config, mode, *args, **params)
 
         self.tokenizer = json.load(open(config.get("data", "word2id"), "r", encoding="utf8"))
-        self.max_len = config.getint("data", "sent_len")
-        self.max_sent = config.getint("data", "max_sent")
+        # self.max_len = config.getint("data", "sent_len")
+        # self.max_sent = config.getint("data", "max_sent")
         self.mode = mode
+        self.unk = "<UNK>"
+        self.pad = "<PAD>"
 
-    def convert_tokens_to_ids(self, text):
+    def convert_tokens_to_ids(self, text, type):
         arr = [[]]
+        if type == 'q':
+            self.max_sent = 30
+            self.max_len = 30
+        else:
+            self.max_sent =30
+            self.max_len = 30
+        
         for a in range(0, len(text)):
-            if text[a] in ["，", "。"]:
+            if text[a] in ['，',"。","；","、"]:
                 arr.append([])
                 continue
             if text[a] in self.tokenizer.keys():
                 arr[-1].append(self.tokenizer[text[a]])
             else:
-                arr[-1].append(self.tokenizer["[UNK]"])
-        while len(arr) < self.max_sent:
-            arr.append([])
-        arr = arr[:self.max_sent]
+                arr[-1].append(self.tokenizer[self.unk])
+
+        #########paras#########
+        paras = [[]]
         for a in range(0, len(arr)):
-            while len(arr[a]) < self.max_len:
-                arr[a].append(self.tokenizer["[PAD]"])
-            arr[a] = arr[a][:self.max_len]
-        return arr
+            if (len(paras[-1]) + len(arr[a]) < self.max_len ):
+                paras[-1].extend(arr[a])
+            elif(len(arr[a]) < self.max_len ):
+                paras.append(arr[a])
+        
+        while len(paras) < self.max_sent:
+            paras.append([])
+        ###################
+ 
+        
+        paras = paras[:self.max_sent]
+        for a in range(0, len(paras)):
+            while len(paras[a]) < self.max_len:
+                paras[a].append(self.tokenizer[self.pad])
+            paras[a] = paras[a][:self.max_len]
+        return paras
 
     def process(self, data, config, mode, *args, **params):
         q = []
@@ -43,15 +66,13 @@ class SentFormatter(BasicFormatter):
             text_q = x['query']['q']
             text_c = x['candidate']['ajjbqk']
 
-            while len(text_q) < self.max_len:
-                text_q.append("[PAD]")
-            text_q = text_q[0:self.max_len]
-            while len(text_c) < self.max_len:
-                text_c.append("[PAD]")
-            text_c = text_c[0:self.max_len]
+            token_q = self.convert_tokens_to_ids(text_q, 'q') # [sent, max]
+            token_c = self.convert_tokens_to_ids(text_c, 'c')
 
-            q.append(self.convert_tokens_to_ids(text_q))
-            c.append(self.convert_tokens_to_ids(text_c))
+            q.append(token_q)
+            c.append(token_c)
+
+
 
             if(mode != 'test'):
                 label.append(x['label'])

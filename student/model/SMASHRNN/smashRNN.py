@@ -2,11 +2,21 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import json
+import numpy as np
+import os
 
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
+class Embedding(nn.Module):
+    def __init__(self, config):
+        super(Embedding, self).__init__()
+        
+        word2vec_mat = np.load(config.get("data","word2vec_path"))
 
+        weight = torch.from_numpy(word2vec_mat).float()
+        self.vocab_size, self.embedding_size = weight.size()
+        self.embedding = nn.Embedding.from_pretrained(weight)
+        
+    def forward(self, input):
+        return self.embedding(input)
 
 class Attention(nn.Module):
     def __init__(self, config, gpu_list, *args, **params):
@@ -94,23 +104,27 @@ class SMASHMoudle(nn.Module):
         super(SMASHMoudle, self).__init__()
 
         self.encoder = DEC(config, gpu_list, *args, **params)
-        self.fc = nn.Linear(config.getint("model", "hidden_size") * 2, 4)
-        self.embedding = nn.Embedding(len(json.load(open(config.get("data", "word2id"), encoding="utf8"))),
-                                      config.getint("model", "hidden_size"))
+        self.fc = nn.Linear(config.getint("model", "hidden_size") * 4, 4)
+        self.embedding = Embedding(config)
+        self.dropout = nn.Dropout(config.getfloat("train", "dropout"))
+        # self.embedding = nn.Embedding(len(json.load(open(config.get("data", "word2id"), encoding="utf8"))),
+        #                               config.getint("model", "hidden_size"))
 
     def forward(self, data):
         q = data['q']
         c = data['c']
-        text = torch.cat([q,c], dim=1)
-        # q = self.embedding(q)
-        # c = self.embedding(c)
-        # q = self.encoder(q)
-        # c = self.encoder(c)
-        x = self.embedding(text)
-        x = self.encoder(x)
-
-
-        s = self.fc(x)
+        # text = torch.cat([q,c], dim=1)
+        # x = self.embedding(text)
+        # x = self.encoder(x)
+        q = self.embedding(q)
+        c = self.embedding(c)
+        q = self.dropout(q)
+        c = self.dropout(c)
+        q = self.encoder(q)
+        c = self.encoder(c) # b * h
+        
+        s = self.fc(torch.cat([q, c], dim=1))
+        s = F.relu(s)
 
         return s
 
@@ -119,6 +133,7 @@ class SMASHRNN(nn.Module):
         super(SMASHRNN, self).__init__()
         self.SMASHMoudle = SMASHMoudle(config, gpu_list, *args, **params)
         self.loss = nn.CrossEntropyLoss()
+        # self.loss = nn.MSELoss()
 
     def init_multi_gpu(self, device, config, *args, **params):
         self.SMASHMoudle = nn.DataParallel(self.SMASHMoudle, device_ids=device)
@@ -127,6 +142,7 @@ class SMASHRNN(nn.Module):
         re = self.SMASHMoudle(data)
         if mode == 'train' or mode == 'valid':
             label = data['label']
+            # label = label.to(torch.float)
             loss = self.loss(re, label)
             return re, loss
         else:
