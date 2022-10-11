@@ -22,7 +22,7 @@ class SentFormatter(BasicFormatter):
     def convert_tokens_to_ids(self, text, type):
         arr = [[]]
         if type == 'q':
-            self.max_sent = 30
+            self.max_sent = 15
             self.max_len = 30
         else:
             self.max_sent =30

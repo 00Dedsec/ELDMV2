@@ -6,7 +6,7 @@ random.seed(1)
 
 
 #使用中文的停用词，这里使用百度的，更多见 "./data/stopwords/"
-with open(r'.\utils\stopword.txt', 'r', encoding="utf8") as g:
+with open(r'./utils/stopword.txt', 'r', encoding="utf8") as g:
     words = g.readlines()
 _stop_words = [i.strip() for i in words]
 _stop_words.extend(['.','（','）','-'])
