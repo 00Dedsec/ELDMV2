@@ -208,42 +208,42 @@ def valid(model, dataset, epoch, writer, config, gpu_list, output_function, mode
                     gen_time_str(delta_t), gen_time_str(delta_t * (total_len - step - 1) / (step + 1))),
                                 "%.3lf" % (total_loss / (step + 1)), 'info', '\r', config)
     
-    # result_rank_dict = {
-    #   1(ridx): {
-    #       (11(candidate_id), [rank, label] )
-    #       (22(candidate_id), [rank, label] )
-    #   },
-    #  2(ridx): {
-    #      ...
-    #   }
-    # }
+        # result_rank_dict = {
+        #   1(ridx): {
+        #       (11(candidate_id), [rank, label] )
+        #       (22(candidate_id), [rank, label] )
+        #   },
+        #  2(ridx): {
+        #      ...
+        #   }
+        # }
 
-    for item in result_rank_dict.keys():
-        result_rank_dict[item] = sorted(result_rank_dict[item].items(), key = lambda candidate: candidate[1][0], reverse=True)
+        for item in result_rank_dict.keys():
+            result_rank_dict[item] = sorted(result_rank_dict[item].items(), key = lambda candidate: candidate[1][0], reverse=True)
 
-    upload_dict = {}
-    for query_id in result_rank_dict.keys():
-        if query_id not in upload_dict.keys():
-            upload_dict[str(query_id)] = []
-        for rank in result_rank_dict[query_id]:
-            upload_dict[str(query_id)].append(int(rank[0]))
-    merics_result = metrics(upload_dict, config)
+        upload_dict = {}
+        for query_id in result_rank_dict.keys():
+            if query_id not in upload_dict.keys():
+                upload_dict[str(query_id)] = []
+            for rank in result_rank_dict[query_id]:
+                upload_dict[str(query_id)].append(int(rank[0]))
+        merics_result = metrics(upload_dict, config)
 
 
-    delta_t = timer() - start_time
-    output_value(epoch, mode, "%d/%d" % (step + 1, total_len), "%s/%s" % (
-        gen_time_str(delta_t), gen_time_str(delta_t * (total_len - step - 1) / (step + 1))),
-                 "%.3lf" % (total_loss / (step + 1)), merics_result, '\r', config)
+        delta_t = timer() - start_time
+        output_value(epoch, mode, "%d/%d" % (step + 1, total_len), "%s/%s" % (
+            gen_time_str(delta_t), gen_time_str(delta_t * (total_len - step - 1) / (step + 1))),
+                    "%.3lf" % (total_loss / (step + 1)), merics_result, '\r', config)
 
-    
+        
 
-    output_value_log(epoch, mode, "%d/%d" % (step + 1, total_len), "%s/%s" % (
-        gen_time_str(delta_t), gen_time_str(delta_t * (total_len - step - 1) / (step + 1))),
-                 "%.3lf" % (total_loss / (step + 1)), merics_result, '\r', config)
+        output_value_log(epoch, mode, "%d/%d" % (step + 1, total_len), "%s/%s" % (
+            gen_time_str(delta_t), gen_time_str(delta_t * (total_len - step - 1) / (step + 1))),
+                    "%.3lf" % (total_loss / (step + 1)), merics_result, '\r', config)
 
-    del result_rank_dict
-    
-    writer.add_scalar(config.get("output", "model_name") + "_eval_epoch", float(total_loss) / (step + 1),
-                      epoch)
+        del result_rank_dict
+        
+        writer.add_scalar(config.get("output", "model_name") + "_eval_epoch", float(total_loss) / (step + 1),
+                        epoch)
 
     model.train()
