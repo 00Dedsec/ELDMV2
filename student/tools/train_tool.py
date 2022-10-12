@@ -64,6 +64,7 @@ def train(parameters, config, gpu_list, do_test=True, *args, **params):
     exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=gamma)
 
     logger.get_log().info("Training start....")
+    logger.get_log().info("The current model is：" + config.get("model", "model_name") + "!")
 
     total_len = len(dataset)
 

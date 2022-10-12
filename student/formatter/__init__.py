@@ -4,6 +4,8 @@ from formatter.Word import WordFormatter
 from formatter.Sent import SentFormatter
 from formatter.BertWord import BertWordFormatter
 from formatter.LFESM import LFESMFormatter
+from formatter.sLawformerWord import sLawformerWordFormatter
+from formatter.cLawformerWord import cLawformerWordFormatter
 
 logger = Logger(__name__)
 
@@ -12,7 +14,9 @@ formatter_list = {
     "WordFormatter": WordFormatter,
     "SentFormatter": SentFormatter,
     "BertWordFormatter": BertWordFormatter,
-    "LFESMFormatter": LFESMFormatter
+    "LFESMFormatter": LFESMFormatter,
+    "sLawformerWordFormatter": sLawformerWordFormatter,
+    "cLawformerWordFormatter": cLawformerWordFormatter,
 }
 
 
