@@ -118,14 +118,22 @@ class LFESMMoudle(nn.Module):
         c_input_ids = data['c_input_ids']
         q_attention_mask = data['q_attention_mask']
         c_attention_mask = data['c_attention_mask']
+        q_features = data['q_features']
+        c_features = data['c_features']
 
         q_output = self.bert(input_ids=q_input_ids, attention_mask=q_attention_mask).last_hidden_state
         c_output = self.bert(input_ids=c_input_ids, attention_mask=c_attention_mask).last_hidden_state
 
-        # todo add features
-        #q_mask = torch.cat([[1], q_attention_mask], dim=1)
+        #add features       
+        q_feature = self._feature(q_features.unsqueeze(1))
+        c_feature = self._feature(c_features.unsqueeze(1))
+        q_extend = torch.cat([q_feature, q_output], dim=1)
+        c_extend = torch.cat([c_feature, c_output], dim=1)
+    
+        q_mask = torch.cat([[1], q_attention_mask], dim=1)
+        c_mask = torch.cat([[1], c_attention_mask], dim=1)
 
-        v_qc = self.siamese(q_output, c_output, q_attention_mask, c_attention_mask)
+        v_qc = self.siamese(q_extend, c_extend, q_mask, c_mask)
 
         output = self._classification(v_qc) 
         pass
