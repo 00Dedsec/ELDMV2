@@ -55,8 +55,8 @@ class LFESMFormatter(BasicFormatter):
         c_input_ids = torch.LongTensor(c_input_ids)
         q_attention_mask = torch.LongTensor(q_attention_mask)
         c_attention_mask = torch.LongTensor(c_attention_mask)
-        q_features = torch.LongTensor(q_features)
-        c_features = torch.LongTensor(c_features)
+        q_features = torch.Tensor(q_features)
+        c_features = torch.Tensor(c_features)
         label = torch.LongTensor(label)
 
         return {"q_input_ids": q_input_ids, 
@@ -66,5 +66,5 @@ class LFESMFormatter(BasicFormatter):
                 "query_candidate_id": query_candidate_id, 
                 "label": label,
                 "q_features": q_features,
-                "c_featurs": c_features
+                "c_features": c_features
                 }

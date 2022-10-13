@@ -62,12 +62,12 @@ def extract_features_and_replace(text):
     for item in subject_pat['legal_represent'].finditer(info):
         represents.append(item.group(1))
         span = item.span()
-        for idx, pos in enumerate(lender_pos):
-            if span[0] > pos[0] and span[1] <= pos[1]:
-                lender_type[idx] = 1
-        for idx, pos in enumerate(borrower_pos):
-            if span[0] >= pos[0] and span[1] <= pos[1]:
-                borrower_type[idx] = 1
+        # for idx, pos in enumerate(lender_pos):
+        #     if span[0] > pos[0] and span[1] <= pos[1]:
+        #         lender_type[idx] = 1
+        # for idx, pos in enumerate(borrower_pos):
+        #     if span[0] >= pos[0] and span[1] <= pos[1]:
+        #         borrower_type[idx] = 1
 
     for name in lenders:
         main = main.replace('原告' + name, '原告').replace(name, '原告')

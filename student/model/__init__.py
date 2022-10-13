@@ -4,6 +4,7 @@ from model.TextCNN.TexnCNN import TextCNN
 from model.BertWord.BertWord import Bertword
 from model.Lawformer.sLawformer import sLawformer
 from model.Lawformer.cLawformer import cLawformer
+from model.LFESM.LFESM import LFESM
 
 model_list = {
     "ELDMV2": ELDMV2,
@@ -11,7 +12,8 @@ model_list = {
     "TextCNN": TextCNN,
     "Bertword": Bertword,
     "sLawformer": sLawformer,
-    "cLawformer": cLawformer
+    "cLawformer": cLawformer,
+    "LFESM": LFESM
 }
 
 

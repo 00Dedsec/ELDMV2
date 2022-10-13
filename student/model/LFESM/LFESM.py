@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from transformers import AutoModel
-from utils import masked_softmax, weighted_sum, sort_by_seq_lens, replace_masked
+from model.LFESM.utils import masked_softmax, weighted_sum, sort_by_seq_lens, replace_masked
 
 class Seq2SeqEncoder(nn.Module):
     """
@@ -48,7 +48,7 @@ class Seq2SeqEncoder(nn.Module):
 
         sorted_batch, sorted_lengths, _, restoration_idx = sort_by_seq_lens(sequences_batch, sequences_lengths)
         packed_batch = nn.utils.rnn.pack_padded_sequence(sorted_batch,
-                                                         sorted_lengths,
+                                                         sorted_lengths.cpu(),
                                                          batch_first=True)
 
         outputs, _ = self._encoder(packed_batch, None)
@@ -107,10 +107,10 @@ class LFESMMoudle(nn.Module):
                                            config.getint("model", "hidden_size"),
                                            bidirectional=True)
 
-        self._classification = nn.Sequential(nn.Dropout(p=config.hidden_dropout_prob),  # p=dropout
+        self._classification = nn.Sequential(nn.Dropout(p=config.getfloat("train", "dropout")),  # p=dropout
                                         nn.Linear(4 * 2 * config.getint("model", "hidden_size"), config.getint("model", "hidden_size")),
                                         nn.Tanh(),
-                                        nn.Dropout(p=config.getint("train", "dropout")),  # p=dropout
+                                        nn.Dropout(p=config.getfloat("train", "dropout")),  # p=dropout
                                         nn.Linear(config.getint("model", "hidden_size"), 4))
     
     def forward(self, data):
@@ -130,13 +130,13 @@ class LFESMMoudle(nn.Module):
         q_extend = torch.cat([q_feature, q_output], dim=1)
         c_extend = torch.cat([c_feature, c_output], dim=1)
     
-        q_mask = torch.cat([[1], q_attention_mask], dim=1)
-        c_mask = torch.cat([[1], c_attention_mask], dim=1)
+        q_mask = torch.cat([torch.tensor([[1]]*len(q_input_ids)).cuda(), q_attention_mask], dim=1)
+        c_mask = torch.cat([torch.tensor([[1]]*len(c_input_ids)).cuda(), c_attention_mask], dim=1)
 
         v_qc = self.siamese(q_extend, c_extend, q_mask, c_mask)
 
         output = self._classification(v_qc) 
-        pass
+        return output
 
     def siamese(self, q_output, c_output, q_mask, c_mask):
         q_length = q_mask.sum(dim=-1).long()
@@ -181,7 +181,7 @@ class LFESM(nn.Module):
         self.loss = nn.CrossEntropyLoss()
 
     def init_multi_gpu(self, device, config, *args, **params):
-        self.LFESMMoudle = nn.DataParallel(self.BertMoudle, device_ids=device)
+        self.LFESMMoudle = nn.DataParallel(self.LFESMMoudle, device_ids=device)
     
     def forward(self, data, config, gpu_list, mode, *args, **params):
         re = self.LFESMMoudle(data)
