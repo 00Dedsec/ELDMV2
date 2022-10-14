@@ -71,6 +71,7 @@ class PLIMoudle(nn.Module):
         super(PLIMoudle, self).__init__()
         self.max_para_q = config.getint("data", "max_para_q")
         self.max_para_c = config.getint("data", "max_para_c")
+        self.max_len = config.getint("data", "max_seq_length")
 
         self.encoder = AutoModel.from_pretrained("bert-base-chinese")
         self.maxpool = nn.MaxPool2d(kernel_size=(1, self.max_para_q))
@@ -84,16 +85,18 @@ class PLIMoudle(nn.Module):
 
         # cls : [b * max_para_q * max_para_d, h]
         # last_hidden_state : [b * max_para_q * max_para_d, max len, h]
-        last_hidden_state, cls = self.bert(input_ids=input_ids_item.view(-1, self.max_len),  # [b * max_para_q * max_para_d, max len]
+        re = self.encoder(input_ids=input_ids_item.view(-1, self.max_len),  # [b * max_para_q * max_para_d, max len]
                                             attention_mask=attention_mask_item.view(-1, self.max_len),  # [b * max_para_q * max_para_d, max len]
                                             token_type_ids=token_type_ids_item.view(-1, self.max_len))  # [b * max_para_q * max_para_d, max len]
+        
+        last_hidden_state, cls = re.last_hidden_state, re.pooler_output
         pooling = 'cls'
         if pooling == 'cls':
             feature = cls
         else:
             feature = torch.mean(last_hidden_state, dim=1)
 
-        feature = feature.view(self.max_para_q, self.max_para_d, -1)  # [max_para_q, max_para_d, h]
+        feature = feature.view(self.max_para_q, self.max_para_c, -1)  # [max_para_q, max_para_d, h]
 
         feature = feature.permute(2, 1, 0)  # [h, max_para_d, max_para_q]
 
