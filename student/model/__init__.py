@@ -5,6 +5,7 @@ from model.BertWord.BertWord import Bertword
 from model.Lawformer.sLawformer import sLawformer
 from model.Lawformer.cLawformer import cLawformer
 from model.LFESM.LFESM import LFESM
+from model.PLI.PLI import PLI
 
 model_list = {
     "ELDMV2": ELDMV2,
@@ -13,7 +14,8 @@ model_list = {
     "Bertword": Bertword,
     "sLawformer": sLawformer,
     "cLawformer": cLawformer,
-    "LFESM": LFESM
+    "LFESM": LFESM,
+    "PLI": PLI
 }
 
 
