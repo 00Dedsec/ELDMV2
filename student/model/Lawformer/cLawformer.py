@@ -9,11 +9,9 @@ class cLawformerMoudle(nn.Module):
         self.encoder = AutoModel.from_pretrained("thunlp/Lawformer")
         self.fc = nn.Linear(config.getint("model","hidden_size"), 4)
 
-    
     def forward(self, data):
         input_ids = data['input_ids']
         attn_mask = data['attention_mask']
-        
         pooler_output = self.encoder(input_ids=input_ids, attention_mask=attn_mask).pooler_output
         re = self.fc(pooler_output)
         return re

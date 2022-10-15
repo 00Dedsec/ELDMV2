@@ -108,6 +108,8 @@ class PLIFromFiles(Dataset):
             for line in f_query:
                 query_json = json.loads(line)
                 ridx = query_json['ridx']
+                query_json['q'] = segment_to_para(query_json['q'], self.para_max_len) #[sent, max]
+
                 # 获取该query的候选案例列表
                 candidate_file_name_list = os.listdir(self.config.get('data','valid_candidates_data_path') + '/' + str(ridx))
                 for candidate_file_name in candidate_file_name_list:
@@ -115,6 +117,8 @@ class PLIFromFiles(Dataset):
                     candidate_file = open(self.config.get('data','valid_candidates_data_path') + '/' + str(ridx) + '/' + candidate_file_name, encoding='utf-8')
                     candidate_json = json.loads(candidate_file.readline(), encoding='utf-8')
                     candidate_json['candidate_id'] = candidate_file_name.split('.')[0]
+                    candidate_json['ajjbqk'] = segment_to_para(candidate_json['ajjbqk'], self.para_max_len)
+
                     data_item['query'] = query_json
                     data_item['candidate'] = candidate_json
                     self.data.append(data_item)
@@ -132,6 +136,8 @@ class PLIFromFiles(Dataset):
             for line in f_query:
                 query_json = json.loads(line, encoding='utf-8')
                 ridx = query_json['ridx']
+                query_json['q'] = segment_to_para(query_json['q'], self.para_max_len) #[sent, max]
+
                 # 获取该query的候选案例列表
                 candidate_file_name_list = os.listdir(self.config.get('data','test_candidates_data_path') + '/' + str(ridx))
                 for candidate_file_name in candidate_file_name_list:
@@ -139,6 +145,8 @@ class PLIFromFiles(Dataset):
                     candidate_file = open(self.config.get('data','test_candidates_data_path') + '/' + str(ridx) + '/' + candidate_file_name, encoding='utf-8')
                     candidate_json = json.loads(candidate_file.readline(), encoding='utf-8')
                     candidate_json['candidate_id'] = candidate_file_name.split('.')[0]
+                    candidate_json['ajjbqk'] = segment_to_para(candidate_json['ajjbqk'], self.para_max_len)
+                    
                     data_item['query'] = query_json
                     data_item['candidate'] = candidate_json
                     self.data.append(data_item)

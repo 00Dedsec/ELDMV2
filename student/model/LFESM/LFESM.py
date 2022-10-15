@@ -181,7 +181,10 @@ class LFESM(nn.Module):
         self.loss = nn.CrossEntropyLoss()
 
     def init_multi_gpu(self, device, config, *args, **params):
-        self.LFESMMoudle = nn.DataParallel(self.LFESMMoudle, device_ids=device)
+        if config.getboolean("distributed", "use"):
+            self.LFESMMoudle = nn.parallel.DistributedDataParallel(self.LFESMMoudle, device_ids=device, find_unused_parameters=True)
+        else:
+            self.LFESMMoudle = nn.DataParallel(self.LFESMMoudle, device_ids=device)
     
     def forward(self, data, config, gpu_list, mode, *args, **params):
         re = self.LFESMMoudle(data)

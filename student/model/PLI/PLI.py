@@ -119,7 +119,10 @@ class PLI(nn.Module):
         self.loss = nn.CrossEntropyLoss()
 
     def init_multi_gpu(self, device, config, *args, **params):
-        self.PLIMoudle = nn.DataParallel(self.PLIMoudle, device_ids=device)
+        if config.getboolean("distributed", "use"):
+            self.PLIMoudle = nn.parallel.DistributedDataParallel(self.PLIMoudle, device_ids=device, find_unused_parameters=True)
+        else:
+            self.PLIMoudle = nn.DataParallel(self.PLIMoudle, device_ids=device)
     
     def forward(self, data, config, gpu_list, mode, *args, **params):
         re = self.PLIMoudle(data)
