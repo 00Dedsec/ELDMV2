@@ -69,6 +69,7 @@ def train(parameters, config, gpu_list, do_test=True, *args, **params):
     total_len = len(dataset)
 
     for epoch_num in range(trained_epoch, epoch):
+
         start_time = timer()
         current_epoch = epoch_num
 
@@ -128,7 +129,5 @@ def train(parameters, config, gpu_list, do_test=True, *args, **params):
                 valid(model, parameters["valid_dataset"], current_epoch, writer, config, gpu_list, output_function)
                 if do_test:
                     valid(model, test_dataset, current_epoch, writer, config, gpu_list, output_function, mode="test")
-
-
 
 
