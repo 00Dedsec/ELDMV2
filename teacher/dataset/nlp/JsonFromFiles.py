@@ -4,31 +4,44 @@ from torch.utils.data import Dataset
 import random
 
 from tools.dataset_tool import dfs_search
+from utils.bio_lables import get_labels
+from transformers import AutoTokenizer
+"""
+{
+    "doc": "*****"
+    "label": 00111
 
-
+}
+"""
 class JsonFromFilesDataset(Dataset):
     def __init__(self, config, mode, encoding="utf8", *args, **params):
         self.config = config
         self.mode = mode
         self.file_list = []
         self.data_path = config.get("data", "%s_data_path" % mode)
-        self.encoding = encoding
-
-        filename_list = config.get("data", "%s_file_list" % mode).replace(" ", "").split(",")
-        recursive = False
-
-        for name in filename_list:
-            self.file_list = self.file_list + dfs_search(os.path.join(self.data_path, name), recursive)
-        self.file_list.sort()
-
         self.data = []
-        for filename in self.file_list:
-            f = open(filename, "r", encoding=encoding)
-            for line in f:
-                self.data.append(json.loads(line))
+        f = open(self.config.get("data", "train_data_path"), encoding='utf-8')
+        for line in f:
+            doc = json.loads(line)
+            words = [c['tokens'] for c in doc['content']]
+            labels = [['O']*len(c['tokens']) for c in doc['content']]
+            if mode != 'test':
+                for event in doc['events']:
+                    for mention in event['mention']:
+                        labels[mention['sent_id']][mention['offset'][0]] = "B-" + event['type']
+                        for i in range(mention['offset'][0] + 1, mention['offset'][1]):
+                            labels[mention['sent_id']][i] = "I-" + event['type']
 
-        if mode == "train":
-            random.shuffle(self.data)
+                for mention in doc['negative_triggers']:
+                    labels[mention['sent_id']][mention['offset'][0]] = "O"
+                    for i in range(mention['offset'][0] + 1, mention['offset'][1]):
+                        labels[mention['sent_id']][i] = "O"
+
+            for i in range(0, len(words)):
+                self.data.append({
+                    "words": words[i],
+                    "labels": labels[i]
+                })
 
     def __getitem__(self, item):
         return self.data[item]

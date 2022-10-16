@@ -217,3 +217,6 @@ bio_labels = [
     "B-受损",
     "I-受损"
 ]
+
+def get_labels():
+    return bio_labels

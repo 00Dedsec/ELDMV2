@@ -4,12 +4,7 @@ import torch.nn.functional as F
 from tools.accuracy_tool import single_label_top1_accuracy
 from utils.bio_lables import bio_labels
 from torch.nn.utils.rnn import pad_sequence
-import torchmetrics
-
-import torch
 import torch.autograd as autograd
-import torch.nn as nn
-from utils.bio_lables import bio_labels
 from transformers import AutoModel
 # Compute log sum exp in a numerically stable way for the forward algorithm
 def log_sum_exp(vec, m_size):
@@ -29,7 +24,7 @@ def log_sum_exp(vec, m_size):
 
 class CRF(nn.Module):
 
-    def __init__(self, tagset_size, use_gpu=False):  # average_batch=False,
+    def __init__(self, tagset_size, use_gpu=True):  # average_batch=False,
         super(CRF, self).__init__()
         print("build CRF...")
         # self.average_batch = average_batch
@@ -296,59 +291,56 @@ def unpad_crf(returned_array, returned_mask, org_array, org_mask):
     out_array[org_mask] = returned_array[returned_mask]
     return 
 
+
 class PLMEncoder(nn.Module):
     def __init__(self, config, gpu_list, *args, **params):
         super(PLMEncoder, self).__init__()
 
-        self.encoder = AutoModel.from_pretrained(config.get("model", "bert_path"))
+        self.encoder = AutoModel.from_pretrained('bert-base-chinese')
 
     def forward(self, input_ids, attention_mask):
         y = self.encoder(input_ids = input_ids, attention_mask = attention_mask).last_hidden_state 
         return y
 
 
-class teacher_moodel(nn.Module):
+class BertCrfMoudle(nn.Module):
     def __init__(self, config, gpu_list, *args, **params):
-        super(teacher_moodel, self).__init__()
-        self.num_labels = len(bio_labels) + 1
-
+        super(BertCrfMoudle, self).__init__()
+        self.num_labels = len(bio_labels)
         self.encoder = PLMEncoder(config, gpu_list, *args, **params)
         self.relu = nn.ReLU()
-        self.dropout = nn.Dropout(0.1)
+        self.dropout = nn.Dropout(config.getfloat('train','dropout'))
         self.linear = nn.Linear(config.getint('model','hidden_size'),self.num_labels + 2)
-        self.crf = CRF(self.num_labels)
 
-
-
-    def init_multi_gpu(self, device, config, *args, **params):
-        if config.getboolean("distributed", "use"):
-            self.encoder = nn.parallel.DistributedDataParallel(self.encoder,find_unused_parameters=True, broadcast_buffers=False)
-            self.relu = nn.parallel.DistributedDataParallel(self.relu,find_unused_parameters=True, broadcast_buffers=False)
-            self.dropout = nn.parallel.DistributedDataParallel(self.dropout, find_unused_parameters=True, broadcast_buffers=False)
-            self.linear = nn.parallel.DistributedDataParallel(self.linear, find_unused_parameters=True, broadcast_buffers=False)
-            self.crf = nn.parallel.DistributedDataParallel(self.crf, find_unused_parameters=True, broadcast_buffers=False)
-        else:
-            print(device)
-            self.encoder = nn.DataParallel(self.encoder, device_ids=device)
-            self.relu = nn.DataParallel(self.relu, device_ids=device)
-            self.dropout = nn.DataParallel(self.dropout, device_ids=device)
-            self.linear = nn.DataParallel(self.linear, device_ids=device)
-            self.crf = nn.DataParallel(self.crf, device_ids=device)
-
-
-    def forward(self, x, config, gpu_list, mode):
-        with torch.no_grad():
-            tokens = x['tokens']
-            attention_mask = x['attention_mask']
-
-        output = self.encoder(input_ids = tokens, attention_mask= attention_mask)
+    def forward(self, x):
+        input_ids = x['input_ids']
+        attention_mask = x['attention_mask']
+        output = self.encoder(input_ids = input_ids, attention_mask= attention_mask)
         # output = self.relu(output)
         output = self.dropout(output)
         logits = self.linear(output) # [batch_size, max_len, num_class]
-        do_test = False
-        if not do_test:
-            with torch.no_grad():
-                labels = x['labels'] # [batch_size, max_len]
+        return logits
+
+class BertCRF(nn.Module):
+    def __init__(self, config, gpu_list, *args, **params):
+        super(BertCRF, self).__init__()
+        self.bert_crf_moudle = BertCrfMoudle(config, gpu_list, *args, **params)
+        self.num_labels = len(bio_labels)
+        self.crf = CRF(self.num_labels)
+
+    def init_multi_gpu(self, device, config, *args, **params):
+        self.bert_crf_moudle = nn.DataParallel(self.bert_crf_moudle, device_ids=device)
+        
+
+
+    def forward(self, data, config, gpu_list, mode):
+
+        re = self.bert_crf_moudle(data)
+
+        # 计算crf
+        if mode == 'train' or mode == 'valid':
+            attention_mask = data['attention_mask']
+            labels = data['labels'] # [batch_size, max_len]
             pad_token_label_id = len(bio_labels)+1
             # loss_fct = nn.CrossEntropyLoss()
             pad_mask = (labels != pad_token_label_id)
@@ -357,19 +349,18 @@ class teacher_moodel(nn.Module):
             if attention_mask is not None:
                 loss_mask = ((attention_mask == 1) & pad_mask)
             else:
-                loss_mask = ((torch.ones(logits.shape) == 1) & pad_mask)
+                loss_mask = ((torch.ones(re.shape) == 1) & pad_mask)
 
             crf_labels, crf_mask = to_crf_pad(labels, loss_mask, pad_token_label_id)
-            crf_logits, _ = to_crf_pad(logits, loss_mask, pad_token_label_id)
+            crf_logits, _ = to_crf_pad(re, loss_mask, pad_token_label_id)
 
             # removing mask stuff from the output path is done later in my_crf_ner but it should be kept away
             # when calculating loss
             best_path, loss = self.crf(crf_logits, crf_mask, crf_labels)  # (torch.ones(logits.shape) == 1)
             best_path = unpad_crf(best_path, crf_mask, labels, pad_mask)
-
             return {
-                'logits': logits, 
-                'loss': loss.mean(),
+                'logits': re, 
+                'loss': loss,
             }
         else:
-            return logits
+            return re

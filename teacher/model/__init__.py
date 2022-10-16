@@ -1,8 +1,8 @@
 import imp
-from model.lawformer import teacher_moodel
+from model.BertCRF import BertCRF
 
 model_list = {
-    "teacher_moodel": teacher_moodel
+    "BertCRF": BertCRF
 }
 
 

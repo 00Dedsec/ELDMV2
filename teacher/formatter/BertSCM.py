@@ -12,7 +12,6 @@ from utils.bio_lables import bio_labels
 class BertSCM(BasicFormatter):
     def __init__(self, config, mode, *args, **params):
         super().__init__(config, mode, *args, **params)
-
         # self.tokenizer = AutoTokenizer.from_pretrained("hfl/chinese-roberta-wwm-ext")
         self.tokenizer = AutoTokenizer.from_pretrained(config.get("model","bert_path"))
         self.max_len = config.getint("data", "max_seq_length")

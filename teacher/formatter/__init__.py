@@ -1,11 +1,13 @@
 from utils.logger import Logger
 from formatter.BertSCM import BertSCM
 from formatter.SentSCM import SentSCM
+from formatter.BertFormatter import BertFormatter
 logger = Logger(__name__)
 
 formatter_list = {
     "BertSCM": BertSCM,
-    "SentSCM": SentSCM
+    "SentSCM": SentSCM,
+    "BertFormatter": BertFormatter
 }
 
 
