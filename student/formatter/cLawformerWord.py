@@ -20,7 +20,8 @@ class cLawformerWordFormatter(BasicFormatter):
     def convert_tokens_to_ids(self, text_q, text_c):
         text_q = text_q[:self.max_len_q:1]
 
-        return self.tokenizer(text_q, text_c, padding='max_length', max_length=self.max_len, truncation=True)
+        # transformer版本为4.21.0，高了会报错
+        return self.tokenizer(text_q, text_c, padding='max_length', max_length=self.max_len, truncation=True, return_token_type_ids=True)
         
     def process(self, data, config, mode, *args, **params):
         input_ids = []
