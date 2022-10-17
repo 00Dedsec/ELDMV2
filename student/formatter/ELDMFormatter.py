@@ -38,6 +38,7 @@ class ELDMFormatter(BasicFormatter):
             token_type_ids_q_sent = []
             for i in range(0, min(len(text_q), self.max_para_q)):
                 re_q = self.convert_tokens_to_ids(text_q)
+                print(torch.tensor(re_q.input_ids).shape)
                 input_ids_q_sent.append(re_q.input_ids)
                 attn_mask_q_sent.append(re_q.attention_mask)
                 token_type_ids_q_sent.append(re_q.token_type_ids)

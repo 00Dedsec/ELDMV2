@@ -12,7 +12,8 @@ class cLawformerMoudle(nn.Module):
     def forward(self, data):
         input_ids = data['input_ids']
         attn_mask = data['attention_mask']
-        pooler_output = self.encoder(input_ids=input_ids, attention_mask=attn_mask).pooler_output
+        token_type_ids = data['token_type_ids']
+        pooler_output = self.encoder(input_ids=input_ids, attention_mask=attn_mask, token_type_ids = token_type_ids).pooler_output
         re = self.fc(pooler_output)
         return re
 

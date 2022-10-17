@@ -25,6 +25,7 @@ class cLawformerWordFormatter(BasicFormatter):
     def process(self, data, config, mode, *args, **params):
         input_ids = []
         attention_mask = []
+        token_type_ids = []
         query_candidate_id = []
         label = []
         for x in data:
@@ -33,15 +34,18 @@ class cLawformerWordFormatter(BasicFormatter):
             text = self.convert_tokens_to_ids(text_q, text_c)
             input_ids.append(text.input_ids)
             attention_mask.append(text.attention_mask)
+            token_type_ids.append(text.token_type_ids)
             if(mode != 'test'):
                 label.append(x['label'])
             query_candidate_id.append((x['query']['ridx'], x['candidate']['candidate_id']))
 
         input_ids = torch.LongTensor(input_ids)
         attention_mask = torch.LongTensor(attention_mask)
+        token_type_ids = torch.LongTensor(token_type_ids)
         label = torch.LongTensor(label)
 
         return {"input_ids": input_ids, 
                 "attention_mask": attention_mask,
+                "token_type_ids": token_type_ids,
                 "query_candidate_id": query_candidate_id, 
                 "label": label}
