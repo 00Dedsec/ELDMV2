@@ -77,10 +77,10 @@ def train(parameters, config, gpu_list, do_test=False ,*args, **params):
 
         exp_lr_scheduler.step(current_epoch)
 
-        train_accuracy = torchmetrics.Accuracy(num_classes=len(bio_labels)+3, average='macro')
-        train_precision = torchmetrics.Precision(num_classes=len(bio_labels)+3, average='macro')
-        train_recall = torchmetrics.Recall(num_classes=len(bio_labels)+3, average='macro')
-        train_f1 = torchmetrics.F1Score(num_classes=len(bio_labels)+3, average='macro')
+        train_accuracy = torchmetrics.Accuracy(num_classes=len(bio_labels)+2, average='macro')
+        train_precision = torchmetrics.Precision(num_classes=len(bio_labels)+2, average='macro')
+        train_recall = torchmetrics.Recall(num_classes=len(bio_labels)+2, average='macro')
+        train_f1 = torchmetrics.F1Score(num_classes=len(bio_labels)+2, average='macro')
 
         # if len(gpu_list) > 0:
         #     train_accuracy = nn.DataParallel(train_accuracy, device_ids=gpu_list)
@@ -119,12 +119,24 @@ def train(parameters, config, gpu_list, do_test=False ,*args, **params):
 
             labels = data['labels'] 
 
-            re = logits.max(dim=2)[1].reshape(-1).cpu()
-            la = labels.reshape(-1).cpu()
-            acc = train_accuracy(re, la)
-            precision = train_precision(re, la)
-            recall = train_recall(re, la)
-            f1 = train_f1(re, la)
+            re = logits.max(dim=2)[1].reshape(-1).cpu() #[batch_size * max_len]
+            la = labels.reshape(-1).cpu() #[batch_size * max_len]
+            
+            re_ = []
+            la_ = []
+            for i in range(0, la.shape[0]):
+                    if la[i] != -100:
+                        re_.append(re[i])
+                        la_.append(la[i])
+
+            # print(re_)
+            # print(la_)
+            re_ = torch.tensor(re_)
+            la_ = torch.tensor(la_)
+            acc = train_accuracy(re_, la_)
+            precision = train_precision(re_, la_)
+            recall = train_recall(re_, la_)
+            f1 = train_f1(re_, la_)
 
             acc_result = {
                 'acc: ': round(float(acc), 4),

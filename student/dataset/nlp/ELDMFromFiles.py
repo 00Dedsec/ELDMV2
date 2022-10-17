@@ -44,7 +44,7 @@ def segment_to_para(text, para_max_len):
         paras.append(para)
     return paras
 
-class PLIFromFiles(Dataset):
+class ELDMFromFiles(Dataset):
     def __init__(self, config, mode, encoding="utf8", *args, **params):
         self.config = config
         self.mode = mode

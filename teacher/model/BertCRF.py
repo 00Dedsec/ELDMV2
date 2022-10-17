@@ -330,10 +330,13 @@ class BertCRF(nn.Module):
 
     def init_multi_gpu(self, device, config, *args, **params):
         self.bert_crf_moudle = nn.DataParallel(self.bert_crf_moudle, device_ids=device)
+        self.crf = nn.DataParallel(self.crf, device_ids=device)
         
 
 
     def forward(self, data, config, gpu_list, mode):
+        # print(data['input_ids'].shape) # [batch_size, max_len]
+        # print(data['labels'].shape) # [batch_size, max_len]
 
         re = self.bert_crf_moudle(data)
 
@@ -341,7 +344,7 @@ class BertCRF(nn.Module):
         if mode == 'train' or mode == 'valid':
             attention_mask = data['attention_mask']
             labels = data['labels'] # [batch_size, max_len]
-            pad_token_label_id = len(bio_labels)+1
+            pad_token_label_id = -100
             # loss_fct = nn.CrossEntropyLoss()
             pad_mask = (labels != pad_token_label_id)
 
@@ -360,7 +363,7 @@ class BertCRF(nn.Module):
             best_path = unpad_crf(best_path, crf_mask, labels, pad_mask)
             return {
                 'logits': re, 
-                'loss': loss,
+                'loss': loss.sum(),
             }
         else:
             return re

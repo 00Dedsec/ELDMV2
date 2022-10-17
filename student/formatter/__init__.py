@@ -8,6 +8,7 @@ from formatter.sLawformerWord import sLawformerWordFormatter
 from formatter.cLawformerWord import cLawformerWordFormatter
 from formatter.LFESM import LFESMFormatter
 from formatter.PLIFormatter import PLIFormatter
+from formatter.ELDMFormatter import ELDMFormatter
 
 logger = Logger(__name__)
 
@@ -20,7 +21,8 @@ formatter_list = {
     "sLawformerWordFormatter": sLawformerWordFormatter,
     "cLawformerWordFormatter": cLawformerWordFormatter,
     "LFESMFormatter": LFESMFormatter,
-    "PLIFormatter": PLIFormatter
+    "PLIFormatter": PLIFormatter,
+    "ELDMFormatter": ELDMFormatter
 }
 
 

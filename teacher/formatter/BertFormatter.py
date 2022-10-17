@@ -70,7 +70,7 @@ class BertFormatter(BasicFormatter):
                 segment_ids_item = segment_ids_item[:self.max_len]
 
                 if(mode != 'test'):
-                    label_item += label_item[:self.max_len]
+                    label_item = label_item[:self.max_len]
 
             assert len(input_ids_item) == self.max_len
             assert len(input_mask_item) == self.max_len

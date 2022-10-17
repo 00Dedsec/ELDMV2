@@ -103,10 +103,22 @@ def valid(model, dataset, epoch, writer, config, gpu_list, output_function, mode
         re = logits.max(dim=2)[1].reshape(-1).cpu()
         la = labels.reshape(-1).cpu()
 
-        acc = valid_accuracy(re, la)
-        precision = valid_precision(re, la)
-        recall = valid_recall(re, la)
-        f1 = valid_f1(re, la)
+        re_ = []
+        la_ = []
+        for i in range(0, la.shape[0]):
+                if la[i] != -100:
+                    re_.append(re[i])
+                    la_.append(la[i])
+
+        # print(re_)
+        # print(la_)
+        re_ = torch.tensor(re_)
+        la_ = torch.tensor(la_)
+        acc = valid_accuracy(re_, la_)
+        precision = valid_precision(re_, la_)
+        recall = valid_recall(re_, la_)
+        f1 = valid_f1(re_, la_)
+
         acc_result = {
             'acc: ': round(float(acc), 4),
             'precision': round(float(precision), 4),

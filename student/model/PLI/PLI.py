@@ -49,6 +49,7 @@ class RNNAttention(nn.Module):
         )# 2 * B * H
 
         # Inputs: input, (h_0, c_0)     Outputs: output, (h_n, c_n)
+        self.rnn.flatten_parameters()
         rnn_out, self.hidden = self.rnn(hidden_seq, self.hidden) # rnn_out: B * seq len * H,  hidden: 2 * B * H
 
         tmp_rnn = rnn_out.permute(0, 2, 1) # B * H * seq len

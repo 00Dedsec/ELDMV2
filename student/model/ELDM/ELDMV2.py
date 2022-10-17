@@ -2,78 +2,57 @@ import torch
 import torch.nn as nn
 from transformers import AutoModel, AutoTokenizer
 
-class CNNMoudle(nn.Module):
-    def __init__(self, config, gpu_list, *args, **params):
-        super(CNNMoudle, self).__init__()
-
-    def forward(self):
-        pass
-
 class ELDMMoudle(nn.Module):
     def __init__(self, config, gpu_list, *args, **params):
         super(ELDMMoudle, self).__init__()
         self.encoder = AutoModel.from_pretrained("bert-base-chinese")
         self.tokenizer = AutoTokenizer.from_pretrained("bert-base-chinese")
-        self.CNN = CNNMoudle(config, gpu_list, *args, **params)
-        self.sep = '[SEP]'
+        self.max_len = config.getint("data", "max_seq_length")
+        self.num_layers=2
+        self.lstm = nn.LSTM(input_size=config.getint("model", "hidden_size"), 
+                            hidden_size = config.getint("model", "hidden_size"), 
+                            num_layers = self.num_layers, 
+                            batch_first = True,
+                            bidirectional = True
+                            )
+        self.attn = nn.MultiheadAttention(embed_dim=self.num_layers * config.getint("model", "hidden_size"), num_heads = 1)
+
+        self.fc = nn.Linear(self.num_layers * config.getint("model", "hidden_size"), 4)
 
     def forward(self, data, *args, **params):
-        print("?")
-        exit()
-        """
-        data  = {
-            "query_input_ids": query_input_ids, # [batch_size, sent1, max_len]
-            "query_token_type_ids": query_token_type_ids,[batch_size, sent1, max_len]
-            "query_attention_mask": query_attention_mask,[batch_size, sent1, max_len]
+        input_ids_q = data['input_ids_q']
+        attn_mask_q = data['attention_mask_q']
+        token_type_ids_q = data['token_type_ids_q']
+        input_ids_c = data['input_ids_c']
+        attn_mask_c = data['attention_mask_c']
+        token_type_ids_c = data['token_type_ids_c']
 
-            "candidate_input_ids": candidate_input_ids, [batch_size, sent2, max_len]
-            "candidate_token_type_ids": candidate_token_type_ids,[batch_size, sent2, max_len]
-            "candidate_attention_mask": candidate_attention_mask,[batch_size, sent2, max_len]
+        input_ids_q.view(-1, self.max_len)
+        attn_mask_q.view(-1, self.max_len)
+        token_type_ids_q.view(-1, self.max_len)
+        input_ids_c.view(-1, self.max_len)
+        attn_mask_c.view(-1, self.max_len)
+        token_type_ids_c.view(-1, self.max_len)
 
-            "query_candidate_id": query_candidate_id,[batch_size, (query_id, candidate_id)]
 
-        }
-        """
-        query_input_ids = data['query_input_ids']
-        query_token_type_ids = data['query_token_type_ids']
-        query_attention_mask = data['query_attention_mask']
-        candidate_input_ids = data['candidate_input_ids']
-        candidate_token_type_ids = data['candidate_token_type_ids']
-        candidate_attention_mask = data['candidate_attention_mask']
+        # [batch_size, sent, max_len, emb]
+        q = self.encoder(input_ids_q, attn_mask_q, token_type_ids_q).last_hidden_state.view(input_ids_q.shape[0], input_ids_q.shape[1], -1)
+        c = self.encoder(input_ids_c, attn_mask_c, token_type_ids_c).last_hidden_state.view(input_ids_q.shape[0], input_ids_q.shape[1], -1)
 
+        q = torch.max(q, dim=2)[0] #[batch_size, sent, emb]
+        c = torch.max(c, dim=2)[0]
+
+        self.lstm.flatten_parameters()
+        q, _ = self.lstm(q) #[batch_size, sent, numlayers * emb]
+        c, _ = self.lstm(c) #[batch_size, sent, numlayers * emb]
+
+        attn_output, _ = self.attn(q.transpose(0, 1), c.transpose(0,1)).transpose(0,1) #[batch_size, sent, numlayers * emb]
         
-        query_candidate_sent_input_ids_matrix = []
-        query_candidate_sent_attention_mask_matrix = []
-        # sent1 与 sent2 排列组合, 得到[batch_size, sent1, sent2, 2 * max_len]
-        for batch_index in query_input_ids.shape[0]:
-            sent2sent_input_ids_matrix = []
-            sent2sent_attention_mask_matrix = []
-            for sent1_index in query_input_ids.shape[1]:
-                row_input_ids_matrix = []
-                row_attention_mask_matrix = []
-                for sent2_index in candidate_input_ids.shape[1]:
-                    input_ids = query_input_ids[batch_index][sent1_index].append(self.tokenizer.convert_tokens_to_ids(self.sep))
-                    input_ids.extend(candidate_input_ids[batch_index][sent2_index])
-                    row_input_ids_matrix.append(input_ids)
+        attn_output = torch.max(attn_output, dim=1)[0]
 
-                    attention_mask = query_attention_mask[batch_index][sent1_index].append(1)
-                    attention_mask.extend(candidate_attention_mask[batch_index][sent2_index])
-                    row_attention_mask_matrix.append(attention_mask)
-                sent2sent_input_ids_matrix.append(row_input_ids_matrix)
-                sent2sent_attention_mask_matrix.append(row_attention_mask_matrix)
-            query_candidate_sent_input_ids_matrix.append(sent2sent_input_ids_matrix) #[batch_size, sent1. sent2, 2 * max_len + 'SEP']
-            query_candidate_sent_attention_mask_matrix.append(sent2sent_attention_mask_matrix)
-            
-        plm_input_shape = (query_input_ids.shape[0], -1, 2 * config.getint("data", "max_seq_length") + 1)
-        query_candidate_sent_input_ids_matrix = query_candidate_sent_input_ids_matrix.view(plm_input_shape) # [batch_size, sent1 * sent2, max_len]
-        pooler_out = self.encoder(input_ids = query_candidate_sent_input_ids_matrix, attention_mask = query_candidate_sent_attention_mask_matrix).pooler_out # [batch_size, sent1 * sent2, emb]
-        # [batch_size, sent1, sent2, emb]
-        pooler_out = pooler_out.view(query_input_ids.shape[0], query_input_ids.shape[1], candidate_input_ids.shape[1], config.getint("model", "hidden_size"))
-        print(pooler_out.shape)
-        exit()
-        # CNN
+        re = self.fc(attn_output)
 
-
+        return re
 
 class ELDMV2(nn.Module):
     def __init__(self, config, gpu_list, *args, **params):
