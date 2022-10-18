@@ -37,20 +37,32 @@ class ELDMFormatter(BasicFormatter):
             attn_mask_q_sent = [] 
             token_type_ids_q_sent = []
             for i in range(0, min(len(text_q), self.max_para_q)):
-                re_q = self.convert_tokens_to_ids(text_q)
-                print(torch.tensor(re_q.input_ids).shape)
+                re_q = self.convert_tokens_to_ids(text_q[i])
+                # print(torch.tensor(re_q.input_ids).shape)
                 input_ids_q_sent.append(re_q.input_ids)
                 attn_mask_q_sent.append(re_q.attention_mask)
                 token_type_ids_q_sent.append(re_q.token_type_ids)
+            
+            while(len(input_ids_q_sent)<self.max_para_q):
+                temp = self.tokenizer('', padding = 'max_length', max_length = self.max_len)
+                input_ids_q_sent.append(temp.input_ids)
+                attn_mask_q_sent.append(temp.attention_mask)
+                token_type_ids_q_sent.append(temp.token_type_ids)
 
             input_ids_c_sent = [] #[sent, max_len]
             attn_mask_c_sent = [] 
             token_type_ids_c_sent = []
             for i in range(0, min(len(text_c), self.max_para_c)):
-                re_c = self.convert_tokens_to_ids(text_c)
+                re_c = self.convert_tokens_to_ids(text_c[i])
                 input_ids_c_sent.append(re_c.input_ids)
                 attn_mask_c_sent.append(re_c.attention_mask)
                 token_type_ids_c_sent.append(re_c.token_type_ids)
+            
+            while(len(input_ids_c_sent)<self.max_para_c):
+                temp = self.tokenizer('', padding = 'max_length', max_length = self.max_len)
+                input_ids_c_sent.append(temp.input_ids)
+                attn_mask_c_sent.append(temp.attention_mask)
+                token_type_ids_c_sent.append(temp.token_type_ids)
             
             input_ids_q.append(input_ids_q_sent)
             attn_mask_q.append(attn_mask_q_sent)
@@ -69,6 +81,8 @@ class ELDMFormatter(BasicFormatter):
         input_ids_c = torch.LongTensor(input_ids_c)
         attn_mask_c = torch.LongTensor(attn_mask_c)
         token_type_ids_c = torch.LongTensor(token_type_ids_c)
+        if(mode != 'test'):
+            label = torch.LongTensor(label)
 
         return {
                 "input_ids_q": input_ids_q, 

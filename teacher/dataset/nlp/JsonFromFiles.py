@@ -21,6 +21,8 @@ class JsonFromFilesDataset(Dataset):
         self.data_path = config.get("data", "%s_data_path" % mode)
         self.data = []
         f = open(self.config.get("data", "train_data_path"), encoding='utf-8')
+        sum_len = 0
+        num = 0
         for line in f:
             doc = json.loads(line)
             words = [c['tokens'] for c in doc['content']]
@@ -42,6 +44,13 @@ class JsonFromFilesDataset(Dataset):
                     "words": words[i],
                     "labels": labels[i]
                 })
+
+            for i in range(0, len(words)):
+                for word in words[i]:
+                    sum_len += len(word)
+                num = num + 1
+
+        print(sum_len//num)
 
     def __getitem__(self, item):
         return self.data[item]

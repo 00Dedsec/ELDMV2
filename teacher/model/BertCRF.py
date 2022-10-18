@@ -345,7 +345,7 @@ class BertCRF(nn.Module):
             attention_mask = data['attention_mask']
             labels = data['labels'] # [batch_size, max_len]
             pad_token_label_id = -100
-            # loss_fct = nn.CrossEntropyLoss()
+            
             pad_mask = (labels != pad_token_label_id)
 
             # Only keep active parts of the loss

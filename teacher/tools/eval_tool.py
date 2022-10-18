@@ -106,7 +106,7 @@ def valid(model, dataset, epoch, writer, config, gpu_list, output_function, mode
         re_ = []
         la_ = []
         for i in range(0, la.shape[0]):
-                if la[i] != -100:
+                if la[i] != -100 and la[i] != 0:
                     re_.append(re[i])
                     la_.append(la[i])
 

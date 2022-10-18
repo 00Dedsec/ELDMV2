@@ -7,7 +7,7 @@ class sLawformerMoudle(nn.Module):
     def __init__(self, config, gpu_list, *args, **params):
         super(sLawformerMoudle, self).__init__()
         self.encoder = AutoModel.from_pretrained("thunlp/Lawformer")
-        self.fc = nn.Linear(config.getint("data","max_seq_length_c"), 4)
+        self.fc = nn.Linear(config.getint("data","max_seq_length_q"), 4)
 
     
     def forward(self, data):
@@ -21,8 +21,8 @@ class sLawformerMoudle(nn.Module):
         q_last_hidden_state = q.last_hidden_state
         c_last_hidden_state = c.last_hidden_state
 
-        c_t = torch.transpose(c_last_hidden_state, 1, 2)
-        re = torch.bmm(q_last_hidden_state, c_t) # [batch_size, max_len, max_len]
+        q_t = torch.transpose(q_last_hidden_state, 1, 2)
+        re = torch.bmm(c_last_hidden_state, q_t) # [batch_size, max_len, max_len]
         re = torch.softmax(re, dim=2)
         re = torch.max(re, dim=1)[0] #[batch, max_len]
 
