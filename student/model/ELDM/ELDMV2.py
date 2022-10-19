@@ -21,16 +21,18 @@ class ELDMMoudle(nn.Module):
 
         #ELDM processing
         self.encoder = AutoModel.from_pretrained("bert-base-chinese")
+        self.dropout = nn.Dropout(config.getfloat("train", "dropout"))
         self.num_layers=2
+        self.sent_attn = nn.MultiheadAttention(embed_dim=config.getint("model", "hidden_size"), num_heads = 1)
         self.lstm = nn.LSTM(input_size=config.getint("model", "hidden_size"), 
                             hidden_size = config.getint("model", "hidden_size"), 
                             num_layers = self.num_layers, 
                             batch_first = True,
-                            bidirectional = True
-                            )
-        self.attn = nn.MultiheadAttention(embed_dim=self.num_layers * config.getint("model", "hidden_size"), num_heads = 1)
+                            bidirectional = True)
+        self.doc_attn = nn.MultiheadAttention(embed_dim=self.num_layers * config.getint("model", "hidden_size"), num_heads = 1)
 
-        self.fc = nn.Linear(self.num_layers * config.getint("model", "hidden_size"), 4)
+
+        self.fc = nn.Bilinear(self.num_layers * config.getint("model", "hidden_size"), self.num_layers * config.getint("model", "hidden_size"),4)
 
     def forward(self, data, gpu_list, *args, **params):
         input_ids_q = data['input_ids_q']
@@ -62,26 +64,42 @@ class ELDMMoudle(nn.Module):
         # event_c = event_c.unsqueeze(2)
 
         # ELDM proccessing
-        # q: [batch_size, sent, max_len, emb]
-        q = self.encoder(input_ids_q.view(-1, self.max_len), attn_mask_q.view(-1, self.max_len)).last_hidden_state.view(input_ids_q.shape[0], input_ids_q.shape[1], input_ids_q.shape[2], -1)
-        c = self.encoder(input_ids_c.view(-1, self.max_len), attn_mask_c.view(-1, self.max_len)).last_hidden_state.view(input_ids_c.shape[0], input_ids_c.shape[1], input_ids_c.shape[2], -1)
+        # q: [batch_size*sent, max_len, emb]
+        q = self.encoder(input_ids_q.view(-1, self.max_len), attn_mask_q.view(-1, self.max_len)).last_hidden_state
+        c = self.encoder(input_ids_c.view(-1, self.max_len), attn_mask_c.view(-1, self.max_len)).last_hidden_state
+
+        q = self.dropout(q)
+        c = self.dropout(c)
 
         # #teacher_model processing       
         # q = torch.cat([event_q, q], dim = 2)
         # c = torch.cat([event_c, c], dim = 2)
 
+        q, _ = self.sent_attn(q.permute(1,0,2), q.permute(1,0,2), q.permute(1,0,2))
+        c, _ = self.sent_attn(c.permute(1,0,2), c.permute(1,0,2), c.permute(1,0,2))
+        q = q.permute(1,0,2)
+        c = c.permute(1,0,2)
+        #q [batch_size, sent, max_len, emb]
+        q = q.view(input_ids_q.shape[0], input_ids_q.shape[1], input_ids_q.shape[2], -1)
+        c = c.view(input_ids_c.shape[0], input_ids_c.shape[1], input_ids_c.shape[2], -1)
+
         q = torch.max(q, dim=2)[0] #[batch_size, sent, emb]
         c = torch.max(c, dim=2)[0]
 
         self.lstm.flatten_parameters()
-        q, _ = self.lstm(q) #[batch_size, sent, numlayers * emb]
-        c, _ = self.lstm(c) #[batch_size, sent, numlayers * emb]
+        q, _ = self.lstm(q)#[batch_size, sent, numlayers * emb]
+        c, _ = self.lstm(c)
 
-        attn_output, _ = self.attn(q.permute(1,0,2), c.permute(1,0,2), c.permute(1,0,2))
-        attn_output = attn_output.permute(1,0,2) #[batch_size, sent, numlayers * emb]
-        attn_output = torch.max(attn_output, dim=1)[0]
+        #[batch_size, sent, numlayers * emb]
+        q, _ = self.doc_attn(q.permute(1,0,2),q.permute(1,0,2),q.permute(1,0,2))
+        c, _ = self.doc_attn(c.permute(1,0,2),c.permute(1,0,2),c.permute(1,0,2))
+        q = q.permute(1,0,2)
+        c = c.permute(1,0,2)
 
-        re = self.fc(attn_output)
+        q = torch.max(q, dim=1)[0] #[batch_size, numlayers * emb]
+        c = torch.max(c, dim=1)[0]
+
+        re = self.fc(q, c)
 
         return re
 

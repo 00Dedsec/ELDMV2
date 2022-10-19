@@ -26,6 +26,26 @@ import re
 
 logger = Logger(__name__)
 
+def get_candidate_doc(candidate_json):
+    doc = ''
+    if 'ajName' in candidate_json.keys():
+        doc += candidate_json['ajName'] + '。'
+
+    if 'ajjbqk' in candidate_json.keys():
+        doc += candidate_json['ajjbqk']
+
+    if 'cpfxgc' in candidate_json.keys():
+        doc += candidate_json['cpfxgc']
+    return doc
+
+def get_query_doc(query_json):
+    doc = ''
+    crimes = query_json['crime']
+    crimes = ','.join(crimes)
+    doc = crimes + '。' + query_json['q']
+    return doc
+        
+
 def segment_to_para(text, para_max_len):
     paras = []
     text = text.strip()
@@ -59,7 +79,8 @@ class PLIFromFiles(Dataset):
             for line in f_query:
                 query_json = json.loads(line)
                 ridx = query_json['ridx']
-                query_json['q'] = segment_to_para(query_json['q'], self.para_max_len) #[sent, max]
+                doc_query = get_query_doc(query_json)
+                query_json['q'] = segment_to_para(doc_query, self.para_max_len) #[sent, max]
 
                 # 获取该query的候选案例列表
                 candidate_file_name_list = os.listdir(self.config.get('data','train_candidates_data_path') + '/' + str(ridx))
@@ -68,7 +89,8 @@ class PLIFromFiles(Dataset):
                     candidate_file = open(self.config.get('data','train_candidates_data_path') + '/' + str(ridx) + '/' + candidate_file_name, encoding='utf-8')
                     candidate_json = json.loads(candidate_file.readline(), encoding='utf-8')
                     candidate_json['candidate_id'] = candidate_file_name.split('.')[0]
-                    candidate_json['ajjbqk'] = segment_to_para(candidate_json['ajjbqk'], self.para_max_len)
+                    doc_candidate = get_candidate_doc(candidate_json=candidate_json)
+                    candidate_json['ajjbqk'] = segment_to_para(doc_candidate, self.para_max_len)
 
                     data_item['query'] = query_json
                     data_item['candidate'] = candidate_json
@@ -109,7 +131,8 @@ class PLIFromFiles(Dataset):
             for line in f_query:
                 query_json = json.loads(line)
                 ridx = query_json['ridx']
-                query_json['q'] = segment_to_para(query_json['q'], self.para_max_len) #[sent, max]
+                doc_query = get_query_doc(query_json)
+                query_json['q'] = segment_to_para(doc_query, self.para_max_len) #[sent, max]
 
                 # 获取该query的候选案例列表
                 candidate_file_name_list = os.listdir(self.config.get('data','valid_candidates_data_path') + '/' + str(ridx))
@@ -118,7 +141,8 @@ class PLIFromFiles(Dataset):
                     candidate_file = open(self.config.get('data','valid_candidates_data_path') + '/' + str(ridx) + '/' + candidate_file_name, encoding='utf-8')
                     candidate_json = json.loads(candidate_file.readline(), encoding='utf-8')
                     candidate_json['candidate_id'] = candidate_file_name.split('.')[0]
-                    candidate_json['ajjbqk'] = segment_to_para(candidate_json['ajjbqk'], self.para_max_len)
+                    doc_candidate = get_candidate_doc(candidate_json=candidate_json)
+                    candidate_json['ajjbqk'] = segment_to_para(doc_candidate, self.para_max_len)
 
                     data_item['query'] = query_json
                     data_item['candidate'] = candidate_json
@@ -136,8 +160,8 @@ class PLIFromFiles(Dataset):
             f_query = open(self.config.get("data", "test_query_data_path"), encoding='utf-8')
             for line in f_query:
                 query_json = json.loads(line, encoding='utf-8')
-                ridx = query_json['ridx']
-                query_json['q'] = segment_to_para(query_json['q'], self.para_max_len) #[sent, max]
+                doc_query = get_query_doc(query_json)
+                query_json['q'] = segment_to_para(doc_query, self.para_max_len) #[sent, max]
 
                 # 获取该query的候选案例列表
                 candidate_file_name_list = os.listdir(self.config.get('data','test_candidates_data_path') + '/' + str(ridx))
@@ -146,7 +170,8 @@ class PLIFromFiles(Dataset):
                     candidate_file = open(self.config.get('data','test_candidates_data_path') + '/' + str(ridx) + '/' + candidate_file_name, encoding='utf-8')
                     candidate_json = json.loads(candidate_file.readline(), encoding='utf-8')
                     candidate_json['candidate_id'] = candidate_file_name.split('.')[0]
-                    candidate_json['ajjbqk'] = segment_to_para(candidate_json['ajjbqk'], self.para_max_len)
+                    doc_candidate = get_candidate_doc(candidate_json=candidate_json)
+                    candidate_json['ajjbqk'] = segment_to_para(doc_candidate, self.para_max_len)
                     
                     data_item['query'] = query_json
                     data_item['candidate'] = candidate_json

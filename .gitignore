@@ -9,3 +9,4 @@ output
 *.npy
 *.bigram-char
 _pycache_
+tensorboard

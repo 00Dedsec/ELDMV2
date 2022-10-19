@@ -18,6 +18,8 @@ class ELDMFormatter(BasicFormatter):
         self.max_para_q = config.getint("data", "max_para_q")
         self.max_para_c = config.getint("data", "max_para_c")
 
+        self.min_len = 3
+
     def convert_tokens_to_ids(self, text):
         return self.tokenizer(text, padding='max_length', max_length=self.max_len, add_special_tokens=True, truncation=True)
 
@@ -36,12 +38,16 @@ class ELDMFormatter(BasicFormatter):
             input_ids_q_sent = [] #[sent, max_len]
             attn_mask_q_sent = [] 
             token_type_ids_q_sent = []
-            for i in range(0, min(len(text_q), self.max_para_q)):
+
+            for i in range(0, len(text_q)):
                 re_q = self.convert_tokens_to_ids(text_q[i])
                 # print(torch.tensor(re_q.input_ids).shape)
                 input_ids_q_sent.append(re_q.input_ids)
                 attn_mask_q_sent.append(re_q.attention_mask)
                 token_type_ids_q_sent.append(re_q.token_type_ids)
+                
+                if (input_ids_q_sent == self.max_para_q):
+                    break
             
             while(len(input_ids_q_sent)<self.max_para_q):
                 temp = self.tokenizer('', padding = 'max_length', max_length = self.max_len)
@@ -52,12 +58,14 @@ class ELDMFormatter(BasicFormatter):
             input_ids_c_sent = [] #[sent, max_len]
             attn_mask_c_sent = [] 
             token_type_ids_c_sent = []
-            for i in range(0, min(len(text_c), self.max_para_c)):
+            for i in range(0, len(text_c)):
                 re_c = self.convert_tokens_to_ids(text_c[i])
                 input_ids_c_sent.append(re_c.input_ids)
                 attn_mask_c_sent.append(re_c.attention_mask)
                 token_type_ids_c_sent.append(re_c.token_type_ids)
-            
+
+                if (len(input_ids_c_sent)==self.max_para_c):
+                    break
             while(len(input_ids_c_sent)<self.max_para_c):
                 temp = self.tokenizer('', padding = 'max_length', max_length = self.max_len)
                 input_ids_c_sent.append(temp.input_ids)

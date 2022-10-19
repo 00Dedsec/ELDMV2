@@ -125,9 +125,9 @@ def train(parameters, config, gpu_list, do_test=False ,*args, **params):
             re_ = []
             la_ = []
             for i in range(0, la.shape[0]):
-                    if la[i] != -100:
-                        re_.append(re[i])
-                        la_.append(la[i])
+                if la[i] != -100 and la[i] != 0:
+                    re_.append(re[i])
+                    la_.append(la[i])
 
             # print(re_)
             # print(la_)
