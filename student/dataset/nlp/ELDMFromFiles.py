@@ -88,7 +88,8 @@ class ELDMFromFiles(Dataset):
                     candidate_file = open(self.config.get('data','train_candidates_data_path') + '/' + str(ridx) + '/' + candidate_file_name, encoding='utf-8')
                     candidate_json = json.loads(candidate_file.readline(), encoding='utf-8')
                     candidate_json['candidate_id'] = candidate_file_name.split('.')[0]
-                    candidate_json['ajjbqk'] = segment_to_para(candidate_json['ajName'] + '。' + candidate_json['ajjbqk'] + candidate_json['cpfxgc'], self.para_max_len)
+                    doc_candidate = get_candidate_doc(candidate_json=candidate_json)
+                    candidate_json['ajjbqk'] = segment_to_para(doc_candidate, self.para_max_len)
 
                     data_item['query'] = query_json
                     data_item['candidate'] = candidate_json
@@ -139,7 +140,6 @@ class ELDMFromFiles(Dataset):
                     candidate_file = open(self.config.get('data','valid_candidates_data_path') + '/' + str(ridx) + '/' + candidate_file_name, encoding='utf-8')
                     candidate_json = json.loads(candidate_file.readline(), encoding='utf-8')
                     candidate_json['candidate_id'] = candidate_file_name.split('.')[0]
-                    doc_candidate = get_candidate_doc(candidate_json=candidate_json)
                     doc_candidate = get_candidate_doc(candidate_json=candidate_json)
                     candidate_json['ajjbqk'] = segment_to_para(doc_candidate, self.para_max_len)
 
