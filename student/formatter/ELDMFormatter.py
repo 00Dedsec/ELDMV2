@@ -46,7 +46,7 @@ class ELDMFormatter(BasicFormatter):
                 attn_mask_q_sent.append(re_q.attention_mask)
                 token_type_ids_q_sent.append(re_q.token_type_ids)
                 
-                if (input_ids_q_sent == self.max_para_q):
+                if (len(input_ids_q_sent) == self.max_para_q):
                     break
             
             while(len(input_ids_q_sent)<self.max_para_q):

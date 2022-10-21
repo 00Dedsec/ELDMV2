@@ -68,7 +68,7 @@ class ELDMFromFiles(Dataset):
         self.config = config
         self.mode = mode
         self.encoding = encoding
-        self.para_max_len = config.getint("data", "max_para_length")
+        self.para_max_len = config.getint("data", "max_seq_length")
 
         self.data = []
 

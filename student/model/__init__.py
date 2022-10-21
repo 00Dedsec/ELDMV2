@@ -1,4 +1,5 @@
 from model.ELDM.ELDMV2 import ELDMV2
+from model.ELDM.ELDMV2SVD import ELDMV2SVD
 from model.SMASHRNN.smashRNN import SMASHRNN
 from model.TextCNN.TexnCNN import TextCNN
 from model.BertWord.BertWord import Bertword
@@ -15,7 +16,8 @@ model_list = {
     "sLawformer": sLawformer,
     "cLawformer": cLawformer,
     "LFESM": LFESM,
-    "PLI": PLI
+    "PLI": PLI,
+    "ELDMV2SVD": ELDMV2SVD
 }
 
 
